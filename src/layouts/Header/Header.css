@@ -1,0 +1,5 @@
+.header {
+	padding: 16px 120px;
+	background: rgba(18, 24, 41, 0.8);
+	backdrop-filter: blur(20px);
+}

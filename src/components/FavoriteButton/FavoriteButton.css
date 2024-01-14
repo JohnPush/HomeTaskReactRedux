@@ -1,0 +1,24 @@
+.favorite-button {
+	border: none;
+	cursor: pointer;
+	background: none;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--Primary-400, #7b6ef6);
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: 0.32px;
+}
+
+.favorite-button:hover {
+	color: #d4d1eb;
+}
+
+.favorite-button_active {
+	color: var(--Success-400, #37d8a7);
+}
+
+.favorite-button_active:hover {
+	color: var(--Success-400, #214e42);
+}

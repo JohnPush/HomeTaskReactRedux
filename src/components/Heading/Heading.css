@@ -1,10 +1,8 @@
 .heading {
 	color: var(--Grey-50, #ebeef5);
-	/* Heading/H1 */
-	font-family: Poppins;
 	font-size: 64px;
-	font-style: normal;
 	font-weight: 600;
 	line-height: 80px;
 	letter-spacing: -1.28px;
+	margin: 0 0 16px 0;
 }

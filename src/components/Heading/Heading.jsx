@@ -1,9 +1,9 @@
 import './Heading.css';
 
-function Heading({ heading }) {
+function Heading() {
 	return (
 		<>
-			<h1 className="heading">{heading}</h1>
+			<h1 className="heading">Поиск</h1>
 		</>
 	);
 }
