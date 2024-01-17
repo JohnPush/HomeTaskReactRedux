@@ -1,8 +1,24 @@
+.container {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 16px;
+	margin-bottom: 24px;
+}
+
 .heading {
 	color: var(--Grey-50, #ebeef5);
 	font-size: 64px;
 	font-weight: 600;
 	line-height: 80px;
 	letter-spacing: -1.28px;
-	margin: 0 0 16px 0;
+	margin: 0;
+}
+
+.subheading {
+	color: var(--Grey-300, #8e95a9);
+	font-weight: 400;
+	margin: 0;
+	width: 588px;
+	line-height: 24px;
 }

@@ -1,9 +1,12 @@
 import './RatingButton.css';
 
 function RatingButton({ valueRating }) {
-	console.log('valueRating:', valueRating);
+	const handleButtonClick = (e) => {
+		e.stopPropagation();
+	};
+
 	return (
-		<button className="rating-button">
+		<button className="rating-button" onClick={handleButtonClick}>
 			<div className="rating-button__icon">
 				<img src="/rating.svg" alt="icon rating" />
 			</div>

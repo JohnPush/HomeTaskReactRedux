@@ -1,11 +1,15 @@
 import './FavoriteButton.css';
 import { useState } from 'react';
 
-function FavoriteButton() {
+function FavoriteButton({ onClick }) {
 	const [isFavorite, setIsFavorite] = useState(false);
 
-	const handleButtonClick = () => {
+	const handleButtonClick = (e) => {
+		e.stopPropagation();
 		setIsFavorite(!isFavorite);
+		if (onClick) {
+			onClick();
+		}
 	};
 
 	return (

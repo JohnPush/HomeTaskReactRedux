@@ -6,13 +6,16 @@
 	align-items: center;
 	gap: 8px;
 	color: var(--Primary-400, #7b6ef6);
+	font-family: Poppins;
+	font-size: 16px;
+	font-style: normal;
 	font-weight: 600;
 	line-height: 24px;
 	letter-spacing: 0.32px;
 }
 
 .favorite-button:hover {
-	color: #d4d1eb;
+	color: #514c7c;
 }
 
 .favorite-button_active {
@@ -20,5 +23,5 @@
 }
 
 .favorite-button_active:hover {
-	color: var(--Success-400, #214e42);
+	color: #365c50;
 }

@@ -1,10 +1,11 @@
 import './Heading.css';
 
-function Heading() {
+function Heading({ heading, subheading }) {
 	return (
-		<>
-			<h1 className="heading">Поиск</h1>
-		</>
+		<div className="container">
+			<h1 className="heading">{heading}</h1>
+			<p className="subheading">{subheading}</p>
+		</div>
 	);
 }
 

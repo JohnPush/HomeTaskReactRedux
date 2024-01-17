@@ -14,7 +14,7 @@
 }
 
 body {
-	background-image: url('../public/Background.svg');
+	background-image: url('/Background.svg');
 	background-size: cover; /* Масштабирование. Для покрытия всего экрана */
 	background-repeat: no-repeat; /* Запрет повторения */
 	background-position: center; /* Выравнивание по центру */

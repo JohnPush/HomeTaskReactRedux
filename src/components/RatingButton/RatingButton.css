@@ -3,6 +3,7 @@
 	top: 16px;
 	left: 16px;
 	z-index: 2;
+
 	border: none;
 	cursor: pointer;
 	display: inline-flex;
@@ -13,11 +14,14 @@
 	background: var(--Black-65, rgba(0, 0, 0, 0.65));
 	backdrop-filter: blur(4px);
 	color: var(--Warning-500, #ffad49);
+	font-family: Poppins;
+	font-size: 16px;
+	font-style: normal;
 	font-weight: 400;
-	line-height: 24px; /* 150% */
+	line-height: 24px;
 }
 .rating-button:hover {
-	background: rgba(70, 55, 55, 0.65);
+	background: rgba(109, 101, 101, 0.65);
 }
 
 .rating-button__icon {
