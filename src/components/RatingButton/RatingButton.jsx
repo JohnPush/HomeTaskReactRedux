@@ -1,17 +1,13 @@
-import './RatingButton.css';
+import styles from './RatingButton.module.css';
 
 function RatingButton({ valueRating }) {
-	const handleButtonClick = (e) => {
-		e.stopPropagation();
-	};
-
 	return (
-		<button className="rating-button" onClick={handleButtonClick}>
-			<div className="rating-button__icon">
+		<div className={styles['rating-button']}>
+			<div className={styles['rating-button__icon']}>
 				<img src="/rating.svg" alt="icon rating" />
 			</div>
 			<div>{valueRating}</div>
-		</button>
+		</div>
 	);
 }
 

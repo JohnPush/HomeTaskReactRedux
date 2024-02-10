@@ -1,12 +1,7 @@
-import './Heading.css';
+import styles from './Heading.module.css';
 
-function Heading({ heading, subheading }) {
-	return (
-		<div className="container">
-			<h1 className="heading">{heading}</h1>
-			<p className="subheading">{subheading}</p>
-		</div>
-	);
+function Heading({ heading }) {
+	return <h1 className={styles['heading']}>{heading}</h1>;
 }
 
 export default Heading;

@@ -1,10 +1,12 @@
-import './App.css';
+// import styles from './App.module.css';
 import Header from './layouts/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Body from './layouts/Body/Body';
-import Heading from './components/Heading/Heading';
-import InputForm from './components/InputForm/InputForm';
+import Search from './components/Search/Search';
 import ListFilms from './components/ListFilms/ListFilms';
+import Login from './components/Login/Login';
+
+import { useEffect, useState } from 'react';
 
 const arrayFilms = [
 	{
@@ -58,25 +60,79 @@ const arrayFilms = [
 ];
 
 function App() {
+	const [users, setUsers] = useState([]);
+
+	// обращение к localStorage
+	useEffect(() => {
+		const data = JSON.parse(localStorage.getItem('data'));
+		if (data) {
+			setUsers(
+				data.map((user) => ({
+					...user
+				}))
+			);
+		}
+	}, []);
+
+	// запись в localStorage
+	useEffect(() => {
+		if (users.length) {
+			localStorage.setItem('data', JSON.stringify(users));
+		}
+	}, [users]);
+
+	const addUser = (user) => {
+		const existUser = users.find((u) => u.userName === user.userName);
+		if (existUser) {
+			setUsers((oldUsers) =>
+				oldUsers.map((u) =>
+					u.userName === user.userName ? { ...u, isLogined: true } : u
+				)
+			);
+		} else {
+			setUsers((oldUsers) => [
+				...oldUsers,
+				{
+					userName: user.userName,
+					isLogined: true,
+					id:
+						oldUsers.length > 0 ? Math.max(...oldUsers.map((u) => u.id)) + 1 : 1
+				}
+			]);
+		}
+	};
+
+	const logoutUser = () => {
+		setUsers(
+			users.map((user) => ({
+				...user,
+				isLogined: false
+			}))
+		);
+	};
+
+	const onSubmit = (values) => {
+		console.log('Форма отправлена:', values);
+	};
+
+	const loggedInUser = users.find((user) => user.isLogined === true);
+	const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
+
 	return (
-		<div className="app">
+		<>
 			<Header>
-				<NavBar />
+				<NavBar
+					loggedInUser={loggedInUserName}
+					showIconLogin={users.some((user) => user.isLogined)}
+					logoutUser={logoutUser}
+				/>
 			</Header>
 			<Body>
-				<Heading
-					heading="Поиск"
-					subheading="Введите название фильма, сериала или мультфильма для поиска и добавления
-				в избранное."
-				/>
-				<InputForm
-					placeholderSearch="Введите название"
-					textButton="Искать"
-					onClick={() => {}}
-				/>
+				<Search onSubmit={onSubmit} />
 				<ListFilms arrayFilms={arrayFilms} />
+				<Login onSubmit={addUser} />
 			</Body>
-		</div>
+		</>
 	);
 }
 

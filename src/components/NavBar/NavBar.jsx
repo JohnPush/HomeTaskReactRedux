@@ -1,25 +1,48 @@
-import './NavBar.css';
+import styles from './NavBar.module.css';
+import cn from 'classnames';
 
-function NavBar() {
+function NavBar({ loggedInUser, showIconLogin, className, logoutUser }) {
+	const handleLogout = () => {
+		if (logoutUser) {
+			logoutUser();
+		}
+	};
+
 	return (
-		<div className="nav-bar">
-			<div className="nav-bar__logo">
-				<img src="/Bookmark.svg" alt="icon bookmark" />
+		<div className={styles['navBar']}>
+			<div className={styles['logo']}>
+				<img src="/Bookmark.svg" alt="logo" />
 			</div>
-			<div className="nav-bar__menu">
-				<a className="menu__item menu__item_active" href="#">
+			<div className={styles['menu']}>
+				<div className={`${styles.menu__item} ${styles.menu__item_active}`}>
 					Поиск фильмов
-				</a>
-				<a className="menu__item" href="#">
+				</div>
+				<div className={styles['menu__item']}>
 					Мои фильмы
-					<div className="menu__counter">X</div>
-				</a>
-				<a className="menu__item login" href="#">
-					Войти
-					<div className="icon-login">
-						<img src="/Icon-login.svg" alt="icon login" />
+					<div className={styles['menu__counter']}>X</div>
+				</div>
+				{loggedInUser && (
+					<div className={`${styles.menu__item} ${styles.loggedInUser}`}>
+						{loggedInUser}
+						<div className={styles['icon']}>
+							<img src="/User Rounded.svg" alt="icon user" />
+						</div>
 					</div>
-				</a>
+				)}
+				<div
+					className={cn(styles.menu__item, className, {
+						[styles['login']]: !showIconLogin,
+						[styles['logout']]: showIconLogin
+					})}
+					onClick={handleLogout}
+				>
+					{loggedInUser ? 'Выйти' : 'Войти'}
+					{!showIconLogin && (
+						<div className={styles['icon']}>
+							<img src="/Icon-login.svg" alt="icon login" />
+						</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);

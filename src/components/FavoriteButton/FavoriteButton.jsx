@@ -1,5 +1,6 @@
-import './FavoriteButton.css';
+import styles from './FavoriteButton.module.css';
 import { useState } from 'react';
+import cn from 'classnames';
 
 function FavoriteButton({ onClick }) {
 	const [isFavorite, setIsFavorite] = useState(false);
@@ -13,10 +14,10 @@ function FavoriteButton({ onClick }) {
 	};
 
 	return (
-		<button
-			className={`favorite-button ${
-				isFavorite ? 'favorite-button_active' : ''
-			}`}
+		<div
+			className={cn(styles['favorite-button'], {
+				[styles['favorite-button_active']]: isFavorite
+			})}
 			onClick={handleButtonClick}
 		>
 			<div>
@@ -26,7 +27,7 @@ function FavoriteButton({ onClick }) {
 				/>
 			</div>
 			<div>{isFavorite ? 'В избранном' : 'В избранное'}</div>
-		</button>
+		</div>
 	);
 }
 
