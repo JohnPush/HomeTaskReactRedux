@@ -5,8 +5,8 @@ import Body from './layouts/Body/Body';
 import Search from './components/Search/Search';
 import ListFilms from './components/ListFilms/ListFilms';
 import Login from './components/Login/Login';
-
 import { useEffect, useState } from 'react';
+import { UserContext } from './context/user.context';
 
 const arrayFilms = [
 	{
@@ -119,20 +119,22 @@ function App() {
 	const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
 
 	return (
-		<>
-			<Header>
-				<NavBar
-					loggedInUser={loggedInUserName}
-					showIconLogin={users.some((user) => user.isLogined)}
-					logoutUser={logoutUser}
-				/>
-			</Header>
-			<Body>
-				<Search onSubmit={onSubmit} />
-				<ListFilms arrayFilms={arrayFilms} />
-				<Login onSubmit={addUser} />
-			</Body>
-		</>
+		<UserContext.Provider value={{}}>
+			<>
+				<Header>
+					<NavBar
+						loggedInUser={loggedInUserName}
+						showIconLogin={users.some((user) => user.isLogined)}
+						logoutUser={logoutUser}
+					/>
+				</Header>
+				<Body>
+					<Search onSubmit={onSubmit} />
+					<ListFilms arrayFilms={arrayFilms} />
+					<Login onSubmit={addUser} />
+				</Body>
+			</>
+		</UserContext.Provider>
 	);
 }
 
