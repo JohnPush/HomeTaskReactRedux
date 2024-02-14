@@ -6,7 +6,7 @@ function RatingButton({ valueRating }) {
 			<div className={styles['rating-button__icon']}>
 				<img src="/rating.svg" alt="icon rating" />
 			</div>
-			<div>{valueRating}</div>
+			<div>{valueRating || ''}</div>
 		</div>
 	);
 }

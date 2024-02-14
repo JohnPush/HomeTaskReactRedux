@@ -1,19 +1,15 @@
 import styles from './ListFilms.module.css';
-import RatingButton from '../RatingButton/RatingButton';
-import FavoriteButton from '../FavoriteButton/FavoriteButton';
+import CardFilm from '../CardFilm/CardFilm';
 
 function ListFilms({ arrayFilms }) {
+	if (arrayFilms.length === 0) {
+		return null;
+	}
+
 	return (
 		<div className={styles['list-film']}>
 			{arrayFilms.map((el) => (
-				<div key={el.id} className={styles['card-button']}>
-					<RatingButton valueRating={el.valueRating} />
-					<div>
-						<img src={el.posterFilm} alt="poster" />
-					</div>
-					<div>{el.nameFilm}</div>
-					<FavoriteButton />
-				</div>
+				<CardFilm key={el.id} film={el} />
 			))}
 		</div>
 	);
