@@ -1,7 +1,7 @@
 import styles from './NavBar.module.css';
-import cn from 'classnames';
+// import cn from 'classnames';
 
-function NavBar({ loggedInUser, showIconLogin, className, logoutUser }) {
+function NavBar({ loggedInUser, logoutUser }) {
 	const handleLogout = () => {
 		if (logoutUser) {
 			logoutUser();
@@ -29,20 +29,22 @@ function NavBar({ loggedInUser, showIconLogin, className, logoutUser }) {
 						</div>
 					</div>
 				)}
-				<div
-					className={cn(styles.menu__item, className, {
-						[styles['login']]: !showIconLogin,
-						[styles['logout']]: showIconLogin
-					})}
-					onClick={handleLogout}
-				>
-					{loggedInUser ? 'Выйти' : 'Войти'}
-					{!showIconLogin && (
+
+				{loggedInUser ? (
+					<div
+						className={`${styles.menu__item} ${styles.logout}`}
+						onClick={handleLogout}
+					>
+						Выйти
+					</div>
+				) : (
+					<div className={`${styles.menu__item} ${styles.login}`}>
+						Войти
 						<div className={styles['icon']}>
 							<img src="/Icon-login.svg" alt="icon login" />
 						</div>
-					)}
-				</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);
