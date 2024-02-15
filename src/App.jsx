@@ -111,10 +111,6 @@ function App() {
 		);
 	};
 
-	const onSubmit = (values) => {
-		console.log('Форма отправлена:', values);
-	};
-
 	const loggedInUser = users.find((user) => user.isLogined === true);
 	const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
 
@@ -129,7 +125,7 @@ function App() {
 					/>
 				</Header>
 				<Body>
-					<Search onSubmit={onSubmit} />
+					<Search />
 					<ListFilms arrayFilms={arrayFilms} />
 					<Login onSubmit={addUser} />
 				</Body>

@@ -2,15 +2,13 @@ import styles from './ListFilms.module.css';
 import CardFilm from '../CardFilm/CardFilm';
 
 function ListFilms({ arrayFilms }) {
-	if (arrayFilms.length === 0) {
-		return null;
-	}
-
 	return (
 		<div className={styles['list-film']}>
-			{arrayFilms.map((el) => (
-				<CardFilm key={el.id} film={el} />
-			))}
+			{arrayFilms.length > 0 ? (
+				arrayFilms.map((el) => <CardFilm key={el.id} film={el} />)
+			) : (
+				<div className={styles['no-films']}>Фильмов нет</div>
+			)}
 		</div>
 	);
 }

@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 import { useEffect, useReducer, useRef } from 'react';
 import { ARRAY_FILMS, formReducer } from './Search.state';
 
-function Search({ onSubmit }) {
+function Search() {
 	const [formState, dispatchForm] = useReducer(formReducer, ARRAY_FILMS);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const inputRef = useRef();
@@ -37,7 +37,7 @@ function Search({ onSubmit }) {
 			onSubmit(values);
 			dispatchForm({ type: 'CLEAR' });
 		}
-	}, [isFormReadyToSubmit, values, onSubmit]);
+	}, [isFormReadyToSubmit, values]);
 
 	const onChange = (e) => {
 		dispatchForm({
@@ -49,6 +49,10 @@ function Search({ onSubmit }) {
 	const handleSearchSubmit = (e) => {
 		e.preventDefault();
 		dispatchForm({ type: 'SUBMIT' });
+	};
+
+	const onSubmit = (values) => {
+		console.log('Форма отправлена:', values);
 	};
 
 	return (
