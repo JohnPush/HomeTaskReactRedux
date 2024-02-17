@@ -1,12 +1,8 @@
 import styles from './NavBar.module.css';
-// import cn from 'classnames';
+import { useUser } from '../../context/user.context';
 
-function NavBar({ loggedInUser, logoutUser }) {
-	const handleLogout = () => {
-		if (logoutUser) {
-			logoutUser();
-		}
-	};
+function NavBar({ loggedInUser }) {
+	const { handleLogout } = useUser();
 
 	return (
 		<div className={styles['navBar']}>
