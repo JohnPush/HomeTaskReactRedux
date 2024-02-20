@@ -1,9 +1,7 @@
 import styles from './NavBar.module.css';
-import { useUser } from '../../context/user.context';
+import Auth from '../Auth/Auth';
 
-function NavBar({ loggedInUser }) {
-	const { handleLogout } = useUser();
-
+function NavBar({ loggedInUser, logoutUser }) {
 	return (
 		<div className={styles['navBar']}>
 			<div className={styles['logo']}>
@@ -17,30 +15,7 @@ function NavBar({ loggedInUser }) {
 					Мои фильмы
 					<div className={styles['menu__counter']}>X</div>
 				</div>
-				{loggedInUser && (
-					<div className={`${styles.menu__item} ${styles.loggedInUser}`}>
-						{loggedInUser}
-						<div className={styles['icon']}>
-							<img src="/User Rounded.svg" alt="icon user" />
-						</div>
-					</div>
-				)}
-
-				{loggedInUser ? (
-					<div
-						className={`${styles.menu__item} ${styles.logout}`}
-						onClick={handleLogout}
-					>
-						Выйти
-					</div>
-				) : (
-					<div className={`${styles.menu__item} ${styles.login}`}>
-						Войти
-						<div className={styles['icon']}>
-							<img src="/Icon-login.svg" alt="icon login" />
-						</div>
-					</div>
-				)}
+				<Auth loggedInUser={loggedInUser} logoutUser={logoutUser} />
 			</div>
 		</div>
 	);
