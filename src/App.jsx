@@ -5,8 +5,9 @@ import Body from './layouts/Body/Body';
 import Search from './components/Search/Search';
 import ListFilms from './components/ListFilms/ListFilms';
 import Login from './components/Login/Login';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 // import { UserProvider } from './context/user.context';
+import { useLocalStorage } from './hooks/use-localstorage.hook';
 
 const arrayFilms = [
 	// {
@@ -59,27 +60,18 @@ const arrayFilms = [
 	// }
 ];
 
+function mapUsers(users) {
+	if (!users) {
+		return [];
+	}
+	return users.map((i) => ({
+		...i,
+		date: new Date(i.date)
+	}));
+}
+
 function App() {
-	const [users, setUsers] = useState([]);
-
-	// обращение к localStorage
-	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('data'));
-		if (data) {
-			setUsers(
-				data.map((user) => ({
-					...user
-				}))
-			);
-		}
-	}, []);
-
-	// запись в localStorage
-	useEffect(() => {
-		if (users.length) {
-			localStorage.setItem('data', JSON.stringify(users));
-		}
-	}, [users]);
+	const [users, setUsers] = useLocalStorage('data', []);
 
 	const addUser = (user) => {
 		const existUser = users.find((u) => u.userName === user.userName);
@@ -90,13 +82,12 @@ function App() {
 				)
 			);
 		} else {
-			setUsers((oldUsers) => [
-				...oldUsers,
+			setUsers([
+				...mapUsers(users),
 				{
 					userName: user.userName,
 					isLogined: true,
-					id:
-						oldUsers.length > 0 ? Math.max(...oldUsers.map((u) => u.id)) + 1 : 1
+					id: users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1
 				}
 			]);
 		}
