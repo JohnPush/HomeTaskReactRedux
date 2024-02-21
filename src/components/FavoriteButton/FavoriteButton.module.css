@@ -1,0 +1,27 @@
+.favorite-button {
+	border: none;
+	cursor: pointer;
+	background: none;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--Primary-400, #7b6ef6);
+	font-family: Poppins;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: 0.32px;
+}
+
+.favorite-button:hover {
+	color: #514c7c;
+}
+
+.favorite-button_active {
+	color: var(--Success-400, #37d8a7);
+}
+
+.favorite-button_active:hover {
+	color: #365c50;
+}

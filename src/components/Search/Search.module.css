@@ -1,0 +1,15 @@
+.search {
+	margin-bottom: 80px;
+}
+
+.containerHeading {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-bottom: 24px;
+}
+
+.containerInputButton {
+	display: flex;
+	gap: 8px;
+}
