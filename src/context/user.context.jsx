@@ -1,12 +1,13 @@
 import { createContext } from 'react';
+import { useLocalStorage } from '../hooks/use-localstorage.hook';
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
-export const UserProvider = ({ children, logoutUser }) => {
+export const UserProvider = ({ children }) => {
+	const [users, setUsers] = useLocalStorage('data', []);
+
 	const handleLogout = () => {
-		if (logoutUser) {
-			logoutUser();
-		}
+		setUsers(users.map((user) => ({ ...user, isLogined: false })));
 	};
 
 	return (

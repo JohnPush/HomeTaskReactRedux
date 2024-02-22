@@ -1,11 +1,13 @@
 import styles from './Auth.module.css';
-// import { useContext } from 'react';
-// import { UserContext } from '../../context/user.context';
+import { useContext } from 'react';
+import { UserContext } from '../../context/user.context';
 
-function Auth({ loggedInUser, users, setUsers }) {
-	const handleLogout = () => {
-		setUsers(users.map((user) => ({ ...user, isLogined: false })));
-	};
+function Auth({ loggedInUser }) {
+	const { handleLogout } = useContext(UserContext);
+
+	// const handleLogout = () => {
+	// 	setUsers(users.map((user) => ({ ...user, isLogined: false })));
+	// };
 	return (
 		<>
 			{loggedInUser && (

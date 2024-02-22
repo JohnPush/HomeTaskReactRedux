@@ -6,7 +6,7 @@ import Search from './components/Search/Search';
 import ListFilms from './components/ListFilms/ListFilms';
 import Login from './components/Login/Login';
 // import { useEffect, useState } from 'react';
-// import { UserProvider } from './context/user.context';
+import { UserProvider } from './context/user.context';
 import { useLocalStorage } from './hooks/use-localstorage.hook';
 
 const arrayFilms = [
@@ -97,20 +97,22 @@ function App() {
 	const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
 
 	return (
-		<>
-			<Header>
-				<NavBar
-					loggedInUser={loggedInUserName}
-					users={users}
-					setUsers={setUsers}
-				/>
-			</Header>
-			<Body>
-				<Search />
-				<ListFilms arrayFilms={arrayFilms} />
-				{!loggedInUser && <Login onSubmit={addUser} />}
-			</Body>
-		</>
+		<UserProvider>
+			<>
+				<Header>
+					<NavBar
+						loggedInUser={loggedInUserName}
+						users={users}
+						setUsers={setUsers}
+					/>
+				</Header>
+				<Body>
+					<Search />
+					<ListFilms arrayFilms={arrayFilms} />
+					{!loggedInUser && <Login onSubmit={addUser} />}
+				</Body>
+			</>
+		</UserProvider>
 	);
 }
 
