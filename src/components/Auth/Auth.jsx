@@ -1,10 +1,10 @@
 import styles from './Auth.module.css';
+// import { useContext } from 'react';
+// import { UserContext } from '../../context/user.context';
 
-function Auth({ loggedInUser, logoutUser }) {
+function Auth({ loggedInUser, users, setUsers }) {
 	const handleLogout = () => {
-		if (logoutUser) {
-			logoutUser();
-		}
+		setUsers(users.map((user) => ({ ...user, isLogined: false })));
 	};
 	return (
 		<>

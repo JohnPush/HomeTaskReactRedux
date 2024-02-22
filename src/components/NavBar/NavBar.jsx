@@ -1,7 +1,7 @@
 import styles from './NavBar.module.css';
 import Auth from '../Auth/Auth';
 
-function NavBar({ loggedInUser, logoutUser }) {
+function NavBar({ loggedInUser, users, setUsers }) {
 	return (
 		<div className={styles['navBar']}>
 			<div className={styles['logo']}>
@@ -15,7 +15,7 @@ function NavBar({ loggedInUser, logoutUser }) {
 					Мои фильмы
 					<div className={styles['menu__counter']}>X</div>
 				</div>
-				<Auth loggedInUser={loggedInUser} logoutUser={logoutUser} />
+				<Auth loggedInUser={loggedInUser} users={users} setUsers={setUsers} />
 			</div>
 		</div>
 	);

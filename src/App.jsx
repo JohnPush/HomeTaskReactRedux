@@ -93,22 +93,17 @@ function App() {
 		}
 	};
 
-	const logoutUser = () => {
-		setUsers(
-			users.map((user) => ({
-				...user,
-				isLogined: false
-			}))
-		);
-	};
-
 	const loggedInUser = users.find((user) => user.isLogined === true);
 	const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
 
 	return (
 		<>
 			<Header>
-				<NavBar loggedInUser={loggedInUserName} logoutUser={logoutUser} />
+				<NavBar
+					loggedInUser={loggedInUserName}
+					users={users}
+					setUsers={setUsers}
+				/>
 			</Header>
 			<Body>
 				<Search />
