@@ -2,17 +2,15 @@ import styles from './Auth.module.css';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
 
-function Auth({ loggedInUser }) {
-	const { handleLogout } = useContext(UserContext);
-
-	// const handleLogout = () => {
-	// 	setUsers(users.map((user) => ({ ...user, isLogined: false })));
-	// };
+function Auth() {
+	const { users, handleLogout } = useContext(UserContext);
+	const loggedInUser = users.find((user) => user.isLogined === true);
+	const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
 	return (
 		<>
 			{loggedInUser && (
 				<div className={`${styles.menu__item} ${styles.loggedInUser}`}>
-					{loggedInUser}
+					{loggedInUserName}
 					<div className={styles['icon']}>
 						<img src="/User Rounded.svg" alt="icon user" />
 					</div>

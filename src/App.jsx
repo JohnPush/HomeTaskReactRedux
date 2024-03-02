@@ -5,9 +5,10 @@ import Body from './layouts/Body/Body';
 import Search from './components/Search/Search';
 import ListFilms from './components/ListFilms/ListFilms';
 import Login from './components/Login/Login';
-// import { useEffect, useState } from 'react';
+// import { useContext } from 'react';
 import { UserProvider } from './context/user.context';
-import { useLocalStorage } from './hooks/use-localstorage.hook';
+
+// import { useLocalStorage } from './hooks/use-localstorage.hook';
 
 const arrayFilms = [
 	// {
@@ -60,56 +61,27 @@ const arrayFilms = [
 	// }
 ];
 
-function mapUsers(users) {
-	if (!users) {
-		return [];
-	}
-	return users.map((i) => ({
-		...i,
-		date: new Date(i.date)
-	}));
-}
+// function mapUsers(users) {
+// 	if (!users) {
+// 		return [];
+// 	}
+// 	return users.map((i) => ({
+// 		...i,
+// 		date: new Date(i.date)
+// 	}));
+// }
 
 function App() {
-	const [users, setUsers] = useLocalStorage('data', []);
-
-	const addUser = (user) => {
-		const existUser = users.find((u) => u.userName === user.userName);
-		if (existUser) {
-			setUsers((oldUsers) =>
-				oldUsers.map((u) =>
-					u.userName === user.userName ? { ...u, isLogined: true } : u
-				)
-			);
-		} else {
-			setUsers([
-				...mapUsers(users),
-				{
-					userName: user.userName,
-					isLogined: true,
-					id: users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1
-				}
-			]);
-		}
-	};
-
-	const loggedInUser = users.find((user) => user.isLogined === true);
-	const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
-
 	return (
 		<UserProvider>
 			<>
 				<Header>
-					<NavBar
-						loggedInUser={loggedInUserName}
-						users={users}
-						setUsers={setUsers}
-					/>
+					<NavBar />
 				</Header>
 				<Body>
 					<Search />
 					<ListFilms arrayFilms={arrayFilms} />
-					{!loggedInUser && <Login onSubmit={addUser} />}
+					<Login />
 				</Body>
 			</>
 		</UserProvider>

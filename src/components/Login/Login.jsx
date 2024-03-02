@@ -2,21 +2,15 @@ import styles from './Login.module.css';
 import Heading from '../Heading/Heading';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { useEffect, useReducer, useRef } from 'react';
+import { useContext, useEffect, useReducer, useRef } from 'react';
+import { UserContext } from '../../context/user.context';
 import { ARRAY_USERS, formReducer } from './Login.state';
 
-function Login({ onSubmit }) {
+function Login() {
+	const { users, setUsers } = useContext(UserContext);
 	const [formState, dispatchForm] = useReducer(formReducer, ARRAY_USERS);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const userNameRef = useRef();
-
-	const focusError = (isValid) => {
-		switch (true) {
-			case !isValid.userName:
-				userNameRef.current.focus();
-				break;
-		}
-	};
 
 	useEffect(() => {
 		let timerId;
@@ -33,16 +27,44 @@ function Login({ onSubmit }) {
 
 	useEffect(() => {
 		if (isFormReadyToSubmit) {
-			onSubmit(values);
+			addUser(values);
 			dispatchForm({ type: 'CLEAR' });
 		}
-	}, [isFormReadyToSubmit, values, onSubmit]);
+	}, [isFormReadyToSubmit, values]);
+
+	const focusError = (isValid) => {
+		switch (true) {
+			case !isValid.userName:
+				userNameRef.current.focus();
+				break;
+		}
+	};
 
 	const onChange = (e) => {
 		dispatchForm({
 			type: 'SET_VALUE',
 			payload: { [e.target.name]: e.target.value }
 		});
+	};
+
+	const addUser = (user) => {
+		const existUser = users.find((u) => u.userName === user.userName);
+		if (existUser) {
+			setUsers((oldUsers) =>
+				oldUsers.map((u) =>
+					u.userName === user.userName ? { ...u, isLogined: true } : u
+				)
+			);
+		} else {
+			setUsers([
+				...users,
+				{
+					userName: user.userName,
+					isLogined: true,
+					id: users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1
+				}
+			]);
+		}
 	};
 
 	const handleSubmitLogin = (e) => {
