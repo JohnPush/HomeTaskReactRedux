@@ -3,9 +3,9 @@ import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
 
 function Auth() {
-	const { users, handleLogout } = useContext(UserContext);
-	const loggedInUser = users.find((user) => user.isLogined === true);
-	const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
+	const { getCurrentUser, handleLogout } = useContext(UserContext);
+	const { loggedInUser, loggedInUserName } = getCurrentUser();
+
 	return (
 		<>
 			{loggedInUser && (

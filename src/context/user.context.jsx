@@ -16,8 +16,16 @@ export const UserProvider = ({ children }) => {
 		setUsers(users.map((user) => ({ ...user, isLogined: false })));
 	};
 
+	const getCurrentUser = () => {
+		const loggedInUser = users.find((user) => user.isLogined === true);
+		const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
+		return { loggedInUser, loggedInUserName };
+	};
+
 	return (
-		<UserContext.Provider value={{ users, setUsers, handleLogout }}>
+		<UserContext.Provider
+			value={{ users, setUsers, handleLogout, getCurrentUser }}
+		>
 			{children}
 		</UserContext.Provider>
 	);
