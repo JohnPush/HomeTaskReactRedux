@@ -8,8 +8,6 @@ import Login from './components/Login/Login';
 // import { useContext } from 'react';
 import { UserProvider } from './context/user.context';
 
-// import { useLocalStorage } from './hooks/use-localstorage.hook';
-
 const arrayFilms = [
 	// {
 	// 	id: 1,

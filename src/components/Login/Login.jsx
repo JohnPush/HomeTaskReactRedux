@@ -33,10 +33,8 @@ function Login() {
 	}, [isFormReadyToSubmit, values]);
 
 	const focusError = (isValid) => {
-		switch (true) {
-			case !isValid.userName:
-				userNameRef.current.focus();
-				break;
+		if (!isValid.userName) {
+			userNameRef.current.focus();
 		}
 	};
 
