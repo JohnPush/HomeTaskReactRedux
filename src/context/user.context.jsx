@@ -7,9 +7,22 @@ export const UserProvider = ({ children }) => {
 		const storedData = localStorage.getItem('data');
 		return storedData ? JSON.parse(storedData) : [];
 	});
+	const [loggedInUser, setLoggedInUser] = useState(null);
+	const [loggedInUserName, setLoggedInUserName] = useState('');
 
 	useEffect(() => {
 		localStorage.setItem('data', JSON.stringify(users));
+	}, [users]);
+
+	useEffect(() => {
+		const user = users.find((user) => user.isLogined === true);
+		if (user) {
+			setLoggedInUser(user);
+			setLoggedInUserName(user.userName);
+		} else {
+			setLoggedInUser(null);
+			setLoggedInUserName('');
+		}
 	}, [users]);
 
 	const handleLogout = () => {
@@ -17,8 +30,6 @@ export const UserProvider = ({ children }) => {
 	};
 
 	const getCurrentUser = () => {
-		const loggedInUser = users.find((user) => user.isLogined === true);
-		const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
 		return { loggedInUser, loggedInUserName };
 	};
 
