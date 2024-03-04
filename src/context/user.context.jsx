@@ -22,9 +22,23 @@ export const UserProvider = ({ children }) => {
 		return { loggedInUser, loggedInUserName };
 	};
 
+	const addUser = (user) => {
+		const existUser = users.find((u) => u.userName === user.userName);
+		if (!existUser) {
+			setUsers([
+				...users,
+				{
+					userName: user.userName,
+					isLogined: true,
+					id: users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1
+				}
+			]);
+		}
+	};
+
 	return (
 		<UserContext.Provider
-			value={{ users, setUsers, handleLogout, getCurrentUser }}
+			value={{ users, setUsers, handleLogout, getCurrentUser, addUser }}
 		>
 			{children}
 		</UserContext.Provider>

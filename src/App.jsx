@@ -5,7 +5,6 @@ import Body from './layouts/Body/Body';
 import Search from './components/Search/Search';
 import ListFilms from './components/ListFilms/ListFilms';
 import Login from './components/Login/Login';
-// import { useContext } from 'react';
 import { UserProvider } from './context/user.context';
 
 const arrayFilms = [
