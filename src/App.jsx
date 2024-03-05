@@ -5,8 +5,7 @@ import Body from './layouts/Body/Body';
 import Search from './components/Search/Search';
 import ListFilms from './components/ListFilms/ListFilms';
 import Login from './components/Login/Login';
-import { useEffect, useState } from 'react';
-// import { UserProvider } from './context/user.context';
+import { UserProvider } from './context/user.context';
 
 const arrayFilms = [
 	// {
@@ -59,72 +58,30 @@ const arrayFilms = [
 	// }
 ];
 
+// function mapUsers(users) {
+// 	if (!users) {
+// 		return [];
+// 	}
+// 	return users.map((i) => ({
+// 		...i,
+// 		date: new Date(i.date)
+// 	}));
+// }
+
 function App() {
-	const [users, setUsers] = useState([]);
-
-	// обращение к localStorage
-	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('data'));
-		if (data) {
-			setUsers(
-				data.map((user) => ({
-					...user
-				}))
-			);
-		}
-	}, []);
-
-	// запись в localStorage
-	useEffect(() => {
-		if (users.length) {
-			localStorage.setItem('data', JSON.stringify(users));
-		}
-	}, [users]);
-
-	const addUser = (user) => {
-		const existUser = users.find((u) => u.userName === user.userName);
-		if (existUser) {
-			setUsers((oldUsers) =>
-				oldUsers.map((u) =>
-					u.userName === user.userName ? { ...u, isLogined: true } : u
-				)
-			);
-		} else {
-			setUsers((oldUsers) => [
-				...oldUsers,
-				{
-					userName: user.userName,
-					isLogined: true,
-					id:
-						oldUsers.length > 0 ? Math.max(...oldUsers.map((u) => u.id)) + 1 : 1
-				}
-			]);
-		}
-	};
-
-	const logoutUser = () => {
-		setUsers(
-			users.map((user) => ({
-				...user,
-				isLogined: false
-			}))
-		);
-	};
-
-	const loggedInUser = users.find((user) => user.isLogined === true);
-	const loggedInUserName = loggedInUser ? loggedInUser.userName : '';
-
 	return (
-		<>
-			<Header>
-				<NavBar loggedInUser={loggedInUserName} logoutUser={logoutUser} />
-			</Header>
-			<Body>
-				<Search />
-				<ListFilms arrayFilms={arrayFilms} />
-				{!loggedInUser && <Login onSubmit={addUser} />}
-			</Body>
-		</>
+		<UserProvider>
+			<>
+				<Header>
+					<NavBar />
+				</Header>
+				<Body>
+					<Search />
+					<ListFilms arrayFilms={arrayFilms} />
+					<Login />
+				</Body>
+			</>
+		</UserProvider>
 	);
 }
 

@@ -2,21 +2,15 @@ import styles from './Login.module.css';
 import Heading from '../Heading/Heading';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { useEffect, useReducer, useRef } from 'react';
+import { useContext, useEffect, useReducer, useRef } from 'react';
+import { UserContext } from '../../context/user.context';
 import { ARRAY_USERS, formReducer } from './Login.state';
 
-function Login({ onSubmit }) {
+function Login() {
+	const { addUser } = useContext(UserContext);
 	const [formState, dispatchForm] = useReducer(formReducer, ARRAY_USERS);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const userNameRef = useRef();
-
-	const focusError = (isValid) => {
-		switch (true) {
-			case !isValid.userName:
-				userNameRef.current.focus();
-				break;
-		}
-	};
 
 	useEffect(() => {
 		let timerId;
@@ -33,10 +27,16 @@ function Login({ onSubmit }) {
 
 	useEffect(() => {
 		if (isFormReadyToSubmit) {
-			onSubmit(values);
+			addUser(values);
 			dispatchForm({ type: 'CLEAR' });
 		}
-	}, [isFormReadyToSubmit, values, onSubmit]);
+	}, [isFormReadyToSubmit, values]);
+
+	const focusError = (isValid) => {
+		if (!isValid.userName) {
+			userNameRef.current.focus();
+		}
+	};
 
 	const onChange = (e) => {
 		dispatchForm({
