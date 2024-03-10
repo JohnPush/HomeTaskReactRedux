@@ -1,3 +1,6 @@
+import { useParams } from 'react-router';
+
 export function PageMovie() {
-	return <>PageMovie</>;
+	const { id } = useParams();
+	return <>Movie - {id}</>;
 }
