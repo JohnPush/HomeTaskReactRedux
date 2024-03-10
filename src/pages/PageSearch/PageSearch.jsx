@@ -1,11 +1,6 @@
-// import styles from './App.module.css';
-import Header from './layouts/Layout/Layout';
-import NavBar from './components/NavBar/NavBar';
-import Body from './layouts/Body/Body';
-import Search from './components/Search/Search';
-import ListFilms from './components/ListFilms/ListFilms';
-import Login from './components/Login/Login';
-import { UserProvider } from './context/user.context';
+import styles from './PageSearch.module.css';
+import Search from '../../components/Search/Search';
+import ListFilms from '../../components/ListFilms/ListFilms';
 
 const arrayFilms = [
 	{
@@ -58,21 +53,11 @@ const arrayFilms = [
 	}
 ];
 
-function App() {
+export function PageSearch() {
 	return (
-		<UserProvider>
-			<>
-				<Header>
-					<NavBar />
-				</Header>
-				<Body>
-					<Search />
-					<ListFilms arrayFilms={arrayFilms} />
-					<Login />
-				</Body>
-			</>
-		</UserProvider>
+		<div className={styles['pageSearch']}>
+			<Search />
+			<ListFilms arrayFilms={arrayFilms} />
+		</div>
 	);
 }
-
-export default App;

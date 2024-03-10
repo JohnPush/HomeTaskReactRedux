@@ -35,7 +35,13 @@ export const UserProvider = ({ children }) => {
 
 	const addUser = (user) => {
 		const existUser = users.find((u) => u.userName === user.userName);
-		if (!existUser) {
+		if (existUser) {
+			setUsers((oldUsers) =>
+				oldUsers.map((u) =>
+					u.userName === user.userName ? { ...u, isLogined: true } : u
+				)
+			);
+		} else {
 			setUsers([
 				...users,
 				{
