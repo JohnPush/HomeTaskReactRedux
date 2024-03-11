@@ -1,0 +1,58 @@
+.inputSearch {
+	width: 352px;
+	display: flex;
+	padding: 12px 16px;
+	align-items: center;
+	gap: 16px;
+	border-radius: 12px;
+	border: 1px solid var(--Grey-700, #323b54);
+	background: var(--Black-10, rgba(0, 0, 0, 0.1));
+}
+
+.inputLogin {
+	width: 352px;
+	display: flex;
+	padding: 12px 16px;
+	align-items: center;
+	gap: 16px;
+	border-radius: 12px;
+	border: 1px solid var(--Grey-700, #323b54);
+	background: var(--Black-10, rgba(0, 0, 0, 0.1));
+	margin-bottom: 27px;
+}
+
+.inputSearch__icon {
+	width: 24px;
+	height: 24px;
+}
+
+.inputContent {
+	padding: 0;
+	height: 40px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	flex: 1 0 0;
+	color: var(--Grey-600, #475069);
+	border: none;
+	background: none;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+}
+
+.invalid {
+	padding: 0;
+	height: 40px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	flex: 1 0 0;
+	color: var(--Grey-600, #475069);
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+
+	border: 1px solid red;
+	background: rgb(68, 6, 6);
+}
