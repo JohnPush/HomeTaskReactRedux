@@ -1,0 +1,66 @@
+.layout {
+	padding: 16px 120px;
+	background: rgba(18, 24, 41, 0.8);
+	backdrop-filter: blur(20px);
+}
+
+.navBar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo {
+	width: 40px;
+	height: 40px;
+}
+
+.menu {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+}
+
+.link {
+	display: flex;
+	padding: 12px 16px;
+	align-items: center;
+	gap: 8px;
+	color: var(--Grey-200, #a8aebf);
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: 0.32px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.link:hover {
+	color: #fff;
+}
+
+.active {
+	color: #fff;
+}
+
+.menu__counter {
+	background: #7b6ef6;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: 0.28px;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.login {
+	padding: 12px 32px;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
