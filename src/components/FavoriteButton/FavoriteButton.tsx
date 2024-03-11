@@ -1,11 +1,15 @@
 import styles from './FavoriteButton.module.css';
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import cn from 'classnames';
 
-function FavoriteButton({ onClick }) {
+interface FavoriteButtonProps {
+	onClick?: () => void;
+}
+
+function FavoriteButton({ onClick }: FavoriteButtonProps) {
 	const [isFavorite, setIsFavorite] = useState(false);
 
-	const handleButtonClick = (e) => {
+	const handleButtonClick = (e: MouseEvent<HTMLDivElement>) => {
 		e.stopPropagation();
 		setIsFavorite(!isFavorite);
 		if (onClick) {

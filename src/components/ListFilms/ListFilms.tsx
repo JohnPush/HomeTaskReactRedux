@@ -1,7 +1,18 @@
 import styles from './ListFilms.module.css';
 import CardFilm from '../CardFilm/CardFilm';
 
-function ListFilms({ arrayFilms }) {
+interface Film {
+	id: number;
+	valueRating: number;
+	posterFilm: string;
+	nameFilm: string;
+}
+
+interface ListFilmsProps {
+	arrayFilms: Film[];
+}
+
+function ListFilms({ arrayFilms }: ListFilmsProps) {
 	return (
 		<div className={styles['list-film']}>
 			{arrayFilms.length ? (

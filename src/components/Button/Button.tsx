@@ -1,9 +1,13 @@
-import { forwardRef } from 'react';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 import styles from './Button.module.css';
 
-const Button = forwardRef(function Button({ onClick, textButton }, ref) {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	textButton: string;
+}
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({ onClick, textButton, ...props }, ref) {
 	return (
-		<button ref={ref} className={styles.button} onClick={onClick}>
+		<button ref={ref} className={styles.button} onClick={onClick} {...props}>
 			{textButton}
 		</button>
 	);

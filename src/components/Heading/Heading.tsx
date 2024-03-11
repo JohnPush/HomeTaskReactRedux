@@ -1,7 +1,13 @@
 import styles from './Heading.module.css';
+import { HTMLAttributes, ReactNode } from 'react';
 
-function Heading({ heading }) {
-	return <h1 className={styles['heading']}>{heading}</h1>;
+
+interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
+	heading: ReactNode;
+}
+
+function Heading({ heading, ...props }: HeadingProps) {
+	return <h1 className={styles['heading']} {...props}>{heading}</h1>;
 }
 
 export default Heading;

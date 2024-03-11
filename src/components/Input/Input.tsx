@@ -1,9 +1,15 @@
 import styles from './Input.module.css';
 import cn from 'classnames';
-import { forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 
-const Input = forwardRef(function Input(
-	{ isValid, showIconSearch, placeholder, value, className, ...props },
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+	isValid?: boolean;
+	showIconSearch?: boolean;
+	className?: string;
+}
+
+const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+	{ isValid = true, showIconSearch = false, placeholder, value, className, ...props },
 	ref
 ) {
 	return (

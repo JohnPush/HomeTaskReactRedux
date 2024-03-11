@@ -1,14 +1,24 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, ReactNode } from 'react';
 
-export const UserContext = createContext();
+export const UserContext = createContext<any>(null);
 
-export const UserProvider = ({ children }) => {
-	const [users, setUsers] = useState(() => {
+interface User {
+	userName: string;
+	isLogined: boolean;
+	id: number;
+}
+
+interface UserProviderProps {
+	children: ReactNode;
+}
+
+export const UserProvider = ({ children }:UserProviderProps) => {
+	const [users, setUsers] = useState<User[]>(() => {
 		const storedData = localStorage.getItem('data');
 		return storedData ? JSON.parse(storedData) : [];
 	});
-	const [loggedInUser, setLoggedInUser] = useState(null);
-	const [loggedInUserName, setLoggedInUserName] = useState('');
+	const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+	const [loggedInUserName, setLoggedInUserName] = useState<string>('');
 
 	useEffect(() => {
 		localStorage.setItem('data', JSON.stringify(users));
@@ -33,7 +43,7 @@ export const UserProvider = ({ children }) => {
 		return { loggedInUser, loggedInUserName };
 	};
 
-	const addUser = (user) => {
+	const addUser = (user: User) => {
 		const existUser = users.find((u) => u.userName === user.userName);
 		if (existUser) {
 			setUsers((oldUsers) =>

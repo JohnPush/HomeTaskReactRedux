@@ -3,7 +3,18 @@ import RatingButton from '../RatingButton/RatingButton';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import { Link } from 'react-router-dom';
 
-function CardFilm({ film }) {
+interface Film {
+	id: number;
+	valueRating: number;
+	posterFilm: string;
+	nameFilm: string;
+}
+
+interface CardFilmProps {
+	film: Film;
+}
+
+function CardFilm({ film }: CardFilmProps) {
 	return (
 		<Link to={`/movie/${film.id}`} className={styles['link']}>
 			<div key={film.id} className={styles['card-button']}>

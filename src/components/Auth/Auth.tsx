@@ -1,6 +1,6 @@
 import styles from './Auth.module.css';
 import { useContext } from 'react';
-import { UserContext } from '../../context/user.context';
+import { UserContext } from '../../context/user.context.tsx';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 

@@ -2,7 +2,14 @@ import styles from './PageSearch.module.css';
 import Search from '../../components/Search/Search';
 import ListFilms from '../../components/ListFilms/ListFilms';
 
-const arrayFilms = [
+interface Film {
+	id: number;
+	valueRating: number;
+	posterFilm: string;
+	nameFilm: string;
+}
+
+const arrayFilms: Film[] = [
 	{
 		id: 1,
 		valueRating: 324,

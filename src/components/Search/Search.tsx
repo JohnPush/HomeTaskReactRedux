@@ -3,24 +3,24 @@ import Heading from '../Heading/Heading';
 import Paragraph from '../Paragraph/Paragraph';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer, useRef, ChangeEvent, FormEvent } from 'react';
 import { ARRAY_FILMS, formReducer } from './Search.state';
 
 function Search() {
 	const [formState, dispatchForm] = useReducer(formReducer, ARRAY_FILMS);
 	const { isValid, isFormReadyToSubmit, values } = formState;
-	const inputRef = useRef();
+	const inputRef = useRef<HTMLInputElement>(null);
 
-	const focusError = (isValid) => {
+	const focusError = (isValid: any) => {
 		switch (true) {
 			case !isValid.input:
-				inputRef.current.focus();
+				inputRef.current?.focus();
 				break;
 		}
 	};
 
 	useEffect(() => {
-		let timerId;
+		let timerId: any;
 		if (!isValid.input) {
 			focusError(isValid);
 			timerId = setTimeout(() => {
@@ -39,19 +39,19 @@ function Search() {
 		}
 	}, [isFormReadyToSubmit, values]);
 
-	const onChange = (e) => {
+	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		dispatchForm({
 			type: 'SET_VALUE',
 			payload: { [e.target.name]: e.target.value }
 		});
 	};
 
-	const handleSearchSubmit = (e) => {
+	const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		dispatchForm({ type: 'SUBMIT' });
 	};
 
-	const onSubmit = (values) => {
+	const onSubmit = (values: any) => {
 		console.log('Форма отправлена:', values);
 	};
 

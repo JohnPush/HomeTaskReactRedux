@@ -1,6 +1,10 @@
 import styles from './RatingButton.module.css';
 
-function RatingButton({ valueRating }) {
+interface RatingButtonProps {
+	valueRating: number;
+}
+
+function RatingButton({ valueRating }: RatingButtonProps) {
 	return (
 		<div className={styles['rating-button']}>
 			<div className={styles['rating-button__icon']}>
