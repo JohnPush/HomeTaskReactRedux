@@ -34,6 +34,14 @@
 	text-decoration: none;
 }
 
+.link:hover {
+	color: #fff;
+}
+
+.active {
+	color: #fff;
+}
+
 .menu__counter {
 	background: #7b6ef6;
 	color: #fff;

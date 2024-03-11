@@ -12,11 +12,7 @@ function Auth() {
 		<>
 			{loggedInUser && (
 				<div
-					className={({ isActive }) =>
-						cn(styles['link'], {
-							[styles.active]: isActive
-						})
-					}
+					className={cn(styles['link'])}
 				>
 					{loggedInUserName}
 					<div className={styles['icon']}>
@@ -27,11 +23,7 @@ function Auth() {
 
 			{loggedInUser ? (
 				<div
-					className={({ isActive }) =>
-						cn(styles['link'], {
-							[styles.active]: isActive
-						})
-					}
+					className={cn(styles['link'])}
 					onClick={handleLogout}
 				>
 					Выйти

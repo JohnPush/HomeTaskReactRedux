@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Layout } from './layouts/Layout/Layout';
-import { PageSearch } from './pages/PageSearch/PageSearch';
-import { PageLogin } from './pages/PageLogin/PageLogin';
-import { PageMovie } from './pages/PageMovie/PageMovie';
-import { PageFavorites } from './pages/PageFavorites/PageFavorites';
-import { Error } from './pages/Error/Error';
-import { UserProvider } from './context/user.context';
+import { Layout } from './layouts/Layout/Layout.tsx';
+import { PageSearch } from './pages/PageSearch/PageSearch.tsx';
+import { PageLogin } from './pages/PageLogin/PageLogin.tsx';
+import { PageMovie } from './pages/PageMovie/PageMovie.tsx';
+import { PageFavorites } from './pages/PageFavorites/PageFavorites.tsx';
+import { Error } from './pages/Error/Error.tsx';
+import { UserProvider } from './context/user.context.tsx';
 
 const router = createBrowserRouter([
 	{

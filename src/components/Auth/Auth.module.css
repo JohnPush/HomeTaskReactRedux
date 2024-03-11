@@ -11,6 +11,14 @@
 	text-decoration: none;
 }
 
+.link:hover {
+	color: #fff;
+}
+
+.active {
+	color: #fff;
+}
+
 .icon {
 	width: 24px;
 	height: 24px;
