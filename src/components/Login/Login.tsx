@@ -5,15 +5,24 @@ import Button from '../Button/Button';
 import { useContext, useEffect, useReducer, useRef, ChangeEvent, FormEvent } from 'react';
 import { UserContext } from '../../context/user.context';
 import { ARRAY_USERS, formReducer } from './Login.state';
+import { nanoid } from 'nanoid';
+import { useNavigate  } from 'react-router-dom';
 
 function Login() {
-	const { addUser } = useContext(UserContext);
+	const userContext = useContext(UserContext);
+	const navigate  = useNavigate ();
+
+	if (!userContext) {
+		return null;
+	}
+
+	const { addUser } = userContext;
 	const [formState, dispatchForm] = useReducer(formReducer, ARRAY_USERS);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const userNameRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
-		let timerId: any;
+		let timerId: NodeJS.Timeout;
 		if (!isValid.userName) {
 			focusError(isValid);
 			timerId = setTimeout(() => {
@@ -27,12 +36,14 @@ function Login() {
 
 	useEffect(() => {
 		if (isFormReadyToSubmit) {
-			addUser(values);
+			const newUser = { ...values, id: parseInt(nanoid()) };
+			addUser(newUser);
 			dispatchForm({ type: 'CLEAR' });
+			navigate('/');
 		}
 	}, [isFormReadyToSubmit, values]);
 
-	const focusError = (isValid: any) => {
+	const focusError = (isValid: { userName: boolean }) => {
 		if (!isValid.userName) {
 			userNameRef.current?.focus();
 		}

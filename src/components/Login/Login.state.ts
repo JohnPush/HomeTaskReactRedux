@@ -1,4 +1,22 @@
-export const ARRAY_USERS = {
+export interface FormState {
+	isValid: {
+		userName: boolean;
+		isLogined: boolean;
+	};
+	values: {
+		userName: string;
+		isLogined: boolean;
+	};
+	isFormReadyToSubmit: boolean;
+}
+
+export type FormAction =
+	| { type: 'SET_VALUE'; payload: Partial<FormState['values']> }
+	| { type: 'CLEAR' }
+	| { type: 'RESET_VALIDITY' }
+	| { type: 'SUBMIT' };
+
+export const ARRAY_USERS: FormState = {
 	isValid: {
 		userName: true,
 		isLogined: false
@@ -10,7 +28,7 @@ export const ARRAY_USERS = {
 	isFormReadyToSubmit: false
 };
 
-export function formReducer(state: any, action: any) {
+export function formReducer(state: FormState, action: FormAction): FormState {
 	switch (action.type) {
 		case 'SET_VALUE':
 			return { ...state, values: { ...state.values, ...action.payload } };
@@ -23,13 +41,15 @@ export function formReducer(state: any, action: any) {
 		case 'RESET_VALIDITY':
 			return { ...state, isValid: ARRAY_USERS.isValid };
 		case 'SUBMIT': {
-			const userNameValidity = state.values.userName?.trim().length;
+			const userNameValidity = state.values.userName?.trim().length ?? 0;
+			const isValidUserName = userNameValidity > 0;
 			return {
 				...state,
 				isValid: {
-					userName: userNameValidity
+					...state.isValid,
+					userName: isValidUserName
 				},
-				isFormReadyToSubmit: userNameValidity
+				isFormReadyToSubmit: isValidUserName
 			};
 		}
 	}

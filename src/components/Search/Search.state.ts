@@ -1,4 +1,20 @@
-export const ARRAY_FILMS = {
+export interface FormState {
+	isValid: {
+		input: boolean;
+	};
+	values: {
+		input: string;
+	};
+	isFormReadyToSubmit: boolean;
+}
+
+export type FormAction =
+	| { type: 'SET_VALUE'; payload: Partial<FormState['values']> }
+	| { type: 'CLEAR' }
+	| { type: 'RESET_VALIDITY' }
+	| { type: 'SUBMIT' };
+
+export const ARRAY_FILMS: FormState = {
 	isValid: {
 		input: true
 	},
@@ -8,7 +24,7 @@ export const ARRAY_FILMS = {
 	isFormReadyToSubmit: false
 };
 
-export function formReducer(state: any, action: any) {
+export function formReducer(state: FormState, action: FormAction): FormState {
 	switch (action.type) {
 		case 'SET_VALUE':
 			return { ...state, values: { ...state.values, ...action.payload } };
@@ -26,9 +42,9 @@ export function formReducer(state: any, action: any) {
 			return {
 				...state,
 				isValid: {
-					input: inputValidity
+					input: !!inputValidity
 				},
-				isFormReadyToSubmit: inputValidity
+				isFormReadyToSubmit: !!inputValidity
 			};
 		}
 	}

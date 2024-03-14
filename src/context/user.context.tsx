@@ -1,11 +1,19 @@
-import { createContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useEffect, useState, ReactNode, Dispatch, SetStateAction } from 'react';
 
-export const UserContext = createContext<any>(null);
+export const UserContext = createContext<UserContextType | null>(null);
 
-interface User {
+export interface User {
 	userName: string;
 	isLogined: boolean;
 	id: number;
+}
+
+interface UserContextType {
+  users: User[];
+  setUsers: Dispatch<SetStateAction<User[]>>;
+  handleLogout: () => void;
+  getCurrentUser: () => { loggedInUser: User | null; loggedInUserName: string };
+  addUser: (user: User) => void;
 }
 
 interface UserProviderProps {

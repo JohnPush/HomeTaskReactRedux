@@ -3,15 +3,14 @@ import RatingButton from '../RatingButton/RatingButton';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import { Link } from 'react-router-dom';
 
-interface Film {
-	id: number;
-	valueRating: number;
-	posterFilm: string;
-	nameFilm: string;
-}
-
 interface CardFilmProps {
-	film: Film;
+	film: 
+	{
+		id: number;
+		valueRating: number;
+		posterFilm: string;
+		nameFilm: string;
+	};
 }
 
 function CardFilm({ film }: CardFilmProps) {

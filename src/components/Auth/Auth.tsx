@@ -5,7 +5,13 @@ import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
 function Auth() {
-	const { getCurrentUser, handleLogout } = useContext(UserContext);
+	const userContext = useContext(UserContext);
+
+	if (!userContext) {
+		return null;
+	}
+
+	const { getCurrentUser, handleLogout } = userContext;
 	const { loggedInUser, loggedInUserName } = getCurrentUser();
 
 	return (
