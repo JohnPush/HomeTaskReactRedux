@@ -37,7 +37,7 @@ export function formReducer(state: FormState, action: FormAction): FormState {
 		case 'RESET_VALIDITY':
 			return { ...state, isValid: ARRAY_FILMS.isValid };
 		case 'SUBMIT': {
-			const inputValidity = state.values.input?.trim().length;
+			const inputValidity = state.values.input?.trim().length || 0;
 
 			return {
 				...state,

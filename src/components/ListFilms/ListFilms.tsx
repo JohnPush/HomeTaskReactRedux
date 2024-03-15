@@ -16,7 +16,7 @@ function ListFilms({ arrayFilms }: ListFilmsProps) {
 	return (
 		<div className={styles['list-film']}>
 			{arrayFilms.length ? (
-				arrayFilms.map((el) => <CardFilm key={el.id} film={el} />)
+				arrayFilms.map((el) => <CardFilm key={el.id} {...el} />)
 			) : (
 				<div className={styles['no-films']}>Фильмов нет</div>
 			)}

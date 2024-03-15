@@ -6,16 +6,9 @@ import { useContext, useEffect, useReducer, useRef, ChangeEvent, FormEvent } fro
 import { UserContext } from '../../context/user.context';
 import { ARRAY_USERS, formReducer } from './Login.state';
 import { nanoid } from 'nanoid';
-import { useNavigate  } from 'react-router-dom';
 
 function Login() {
 	const userContext = useContext(UserContext);
-	const navigate  = useNavigate ();
-
-	if (!userContext) {
-		return null;
-	}
-
 	const { addUser } = userContext;
 	const [formState, dispatchForm] = useReducer(formReducer, ARRAY_USERS);
 	const { isValid, isFormReadyToSubmit, values } = formState;
@@ -39,7 +32,6 @@ function Login() {
 			const newUser = { ...values, id: parseInt(nanoid()) };
 			addUser(newUser);
 			dispatchForm({ type: 'CLEAR' });
-			navigate('/');
 		}
 	}, [isFormReadyToSubmit, values]);
 

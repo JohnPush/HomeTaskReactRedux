@@ -41,8 +41,8 @@ export function formReducer(state: FormState, action: FormAction): FormState {
 		case 'RESET_VALIDITY':
 			return { ...state, isValid: ARRAY_USERS.isValid };
 		case 'SUBMIT': {
-			const userNameValidity = state.values.userName?.trim().length ?? 0;
-			const isValidUserName = userNameValidity > 0;
+			const isValidUserName = !!state.values.userName?.trim().length;
+
 			return {
 				...state,
 				isValid: {

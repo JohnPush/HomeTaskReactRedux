@@ -1,8 +1,7 @@
 import styles from './Paragraph.module.css';
-import { ReactNode } from 'react';
 
 interface ParagraphProps {
-	paragraph: ReactNode;
+	paragraph: string;
 }
 
 function Paragraph({ paragraph, ...props }: ParagraphProps) {

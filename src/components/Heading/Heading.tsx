@@ -1,9 +1,9 @@
 import styles from './Heading.module.css';
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes } from 'react';
 
 
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
-	heading: ReactNode;
+	heading: string;
 }
 
 function Heading({ heading, ...props }: HeadingProps) {

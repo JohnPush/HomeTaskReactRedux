@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState, ReactNode, Dispatch, SetStateAction } from 'react';
 
-export const UserContext = createContext<UserContextType | null>(null);
+export const UserContext = createContext<UserContextType>({} as UserContextType);
 
 export interface User {
 	userName: string;

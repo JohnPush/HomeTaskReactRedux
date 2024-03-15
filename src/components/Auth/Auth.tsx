@@ -6,11 +6,6 @@ import cn from 'classnames';
 
 function Auth() {
 	const userContext = useContext(UserContext);
-
-	if (!userContext) {
-		return null;
-	}
-
 	const { getCurrentUser, handleLogout } = userContext;
 	const { loggedInUser, loggedInUserName } = getCurrentUser();
 
