@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 
 export function PageMovie() {
-	const { id } = useParams<{ id: string }>(); //почему id: number ошибка?
+	const { id } = useParams<{ id: string }>();
 	return <>Movie - {id}</>;
 }
