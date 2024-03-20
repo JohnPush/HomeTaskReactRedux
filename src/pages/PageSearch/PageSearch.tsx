@@ -18,11 +18,6 @@ export function PageSearch() {
 	const getMenu = async () => {
 		try {
 			setIsLoading(true);
-			await new Promise<void>((resolve) => {
-				setTimeout(() => {
-					resolve();
-				}, 2000);
-			});
 			const res = await axios.get<Film>(`${PREFIX}/?q=Avengers%3A%20Endgame`);
 			const data = res.data.description;
         	setFilms(data);
@@ -56,3 +51,5 @@ export function PageSearch() {
 
 	);
 }
+
+export default PageSearch;

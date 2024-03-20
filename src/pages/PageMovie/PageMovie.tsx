@@ -1,6 +1,10 @@
-import { useParams } from 'react-router';
+import { useLoaderData } from 'react-router-dom';
+import { Film } from '../../interfaces/film.interface';
 
 export function PageMovie() {
-	const { id } = useParams<{ id: string }>();
-	return <>Movie - {id}</>;
+    const data = useLoaderData() as Film;
+    const movie = data.description[0];
+    
+    return <>Movie - {movie['#TITLE']}</>;
 }
+
