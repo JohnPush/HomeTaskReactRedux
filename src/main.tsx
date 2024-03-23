@@ -10,21 +10,18 @@ import { Error as ErrorPage } from './pages/Error/Error.tsx';
 import { UserProvider } from './context/user.context.tsx';
 import axios from 'axios';
 import { PREFIX } from './helpers/API.ts';
+import { RequireAuth } from './helpers/RequireAuth.tsx';
 
 const PageSearch = lazy(() => import('./pages/PageSearch/PageSearch'));
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Layout />,
+		element: <RequireAuth><Layout /></RequireAuth>,
 		children: [
 			{
 				path: '/',
 				element: <Suspense fallback={<>Загрузка...</>}><PageSearch /></Suspense>
-			},
-			{
-				path: '/login',
-				element: <PageLogin />
 			},
 			{
 				path: '/movie/:id',
@@ -44,6 +41,16 @@ const router = createBrowserRouter([
 				path: '/favorites',
 				element: <PageFavorites />
 			}
+		]
+	},
+	{
+		path: '/',
+		element: <Layout />,
+		children: [
+						{
+				path: '/login',
+				element: <PageLogin />
+			},
 		]
 	},
 	{
