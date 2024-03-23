@@ -15,6 +15,6 @@ export function SearchList({ films }: SearchListProps) {
 			rating={f['#RANK']}
 			image={f['#IMG_POSTER']}
 		/>
-	))};
+	))}
 	</div>;
 }

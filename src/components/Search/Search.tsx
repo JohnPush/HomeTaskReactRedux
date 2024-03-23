@@ -6,7 +6,11 @@ import Button from '../Button/Button';
 import { useEffect, useReducer, useRef, ChangeEvent, FormEvent } from 'react';
 import { ARRAY_FILMS, formReducer, FormState } from './Search.state';
 
-function Search() {
+interface SearchProps {
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+function Search({ onChange }: SearchProps) {
 	const [formState, dispatchForm] = useReducer(formReducer, ARRAY_FILMS);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -39,7 +43,8 @@ function Search() {
 		}
 	}, [isFormReadyToSubmit, values]);
 
-	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		onChange(e);
 		dispatchForm({
 			type: 'SET_VALUE',
 			payload: { [e.target.name]: e.target.value }
@@ -66,7 +71,7 @@ function Search() {
 					placeholder="Введите название"
 					type="text"
 					ref={inputRef}
-					onChange={onChange}
+					onChange={onChangeHandler}
 					value={values.input}
 					name="input"
 					isValid={!isValid.input}
