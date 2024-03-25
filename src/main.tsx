@@ -8,8 +8,8 @@ import { PageMovie } from './pages/PageMovie/PageMovie.tsx';
 import { PageFavorites } from './pages/PageFavorites/PageFavorites.tsx';
 import { Error as ErrorPage } from './pages/Error/Error.tsx';
 import { UserProvider } from './context/user.context.tsx';
-import axios from 'axios';
-import { PREFIX } from './helpers/API.ts';
+// import axios from 'axios';
+// import { PREFIX } from './helpers/API.ts';
 import { RequireAuth } from './helpers/RequireAuth.tsx';
 
 const PageSearch = lazy(() => import('./pages/PageSearch/PageSearch'));
@@ -27,15 +27,10 @@ const router = createBrowserRouter([
 				path: '/movie/:id',
 				element: <PageMovie />,
 				errorElement: <>Ошибка</>,
-				loader: async ({ params }) => {
-					await new Promise<void>((resolve) => {
-						setTimeout(() => {
-							resolve();
-						}, 2000);
-					});
-					const { data } = await axios.get(`${PREFIX}/?q=${params.id}`);
-					return data;
-				}
+				// loader: async ({ params }) => {
+				// 	const { data } = await axios.get(`${PREFIX}/?q=${params.id}`);
+				// 	return data;
+				// }
 			},
 			{
 				path: '/favorites',
