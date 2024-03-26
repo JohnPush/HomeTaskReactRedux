@@ -19,9 +19,16 @@
 	font-family: 'Poppins', sans-serif;
 	font-size: 16px;
 	font-style: normal;
+	width: 266px;
+	height: 504px;
 }
 
 .card-button:hover {
 	background: rgba(20, 22, 27, 0.8);
 	backdrop-filter: blur(40px);
+}
+
+.poster {
+	max-width: 100%;
+	overflow: hidden;
 }
