@@ -1,48 +1,51 @@
-export interface FormState {
+export interface SearchFormState {
 	isValid: {
-		input: boolean;
+		searchField: boolean;
 	};
 	values: {
-		input: string;
+		searchField: string;
 	};
 	isFormReadyToSubmit: boolean;
 }
 
-export type FormAction =
-	| { type: 'SET_VALUE'; payload: Partial<FormState['values']> }
+export type SearchFormAction =
+	| { type: 'SET_VALUE'; payload: Partial<SearchFormState['values']> }
 	| { type: 'CLEAR' }
 	| { type: 'RESET_VALIDITY' }
 	| { type: 'SUBMIT' };
 
-export const ARRAY_FILMS: FormState = {
+export const INITIAL_SEARCH_FORM_STATE: SearchFormState = {
 	isValid: {
-		input: true
+		searchField: true
 	},
 	values: {
-		input: ''
+		searchField: ''
 	},
 	isFormReadyToSubmit: false
 };
 
-export function formReducer(state: FormState, action: FormAction): FormState {
+export function formReducer(
+	state: SearchFormState,
+	action: SearchFormAction
+): SearchFormState {
 	switch (action.type) {
 		case 'SET_VALUE':
 			return { ...state, values: { ...state.values, ...action.payload } };
 		case 'CLEAR':
 			return {
 				...state,
-				values: ARRAY_FILMS.values,
+				values: INITIAL_SEARCH_FORM_STATE.values,
 				isFormReadyToSubmit: false
 			};
 		case 'RESET_VALIDITY':
-			return { ...state, isValid: ARRAY_FILMS.isValid };
+			return { ...state, isValid: INITIAL_SEARCH_FORM_STATE.isValid };
 		case 'SUBMIT': {
-			const inputValidity = state.values.input?.trim().length || 0;
+			const inputValidity = state.values.searchField?.trim().length || 0;
 
 			return {
 				...state,
 				isValid: {
-					input: !!inputValidity
+					searchField: !!inputValidity
 				},
 				isFormReadyToSubmit: !!inputValidity
 			};

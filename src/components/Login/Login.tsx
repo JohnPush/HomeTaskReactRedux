@@ -4,13 +4,13 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { useContext, useEffect, useReducer, useRef, ChangeEvent, FormEvent } from 'react';
 import { UserContext } from '../../context/user.context';
-import { ARRAY_USERS, formReducer } from './Login.state';
+import { INITIAL_LOGIN_FORM_STATE, formReducer } from './Login.state';
 import { nanoid } from 'nanoid';
 
 function Login() {
 	const userContext = useContext(UserContext);
 	const { addUser } = userContext;
-	const [formState, dispatchForm] = useReducer(formReducer, ARRAY_USERS);
+	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_LOGIN_FORM_STATE);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const userNameRef = useRef<HTMLInputElement>(null);
 

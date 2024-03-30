@@ -1,4 +1,4 @@
-export interface FormState {
+export interface LoginFormState {
 	isValid: {
 		userName: boolean;
 		isLogined: boolean;
@@ -10,13 +10,13 @@ export interface FormState {
 	isFormReadyToSubmit: boolean;
 }
 
-export type FormAction =
-	| { type: 'SET_VALUE'; payload: Partial<FormState['values']> }
+export type LoginFormAction =
+	| { type: 'SET_VALUE'; payload: Partial<LoginFormState['values']> }
 	| { type: 'CLEAR' }
 	| { type: 'RESET_VALIDITY' }
 	| { type: 'SUBMIT' };
 
-export const ARRAY_USERS: FormState = {
+export const INITIAL_LOGIN_FORM_STATE: LoginFormState = {
 	isValid: {
 		userName: true,
 		isLogined: false
@@ -28,18 +28,21 @@ export const ARRAY_USERS: FormState = {
 	isFormReadyToSubmit: false
 };
 
-export function formReducer(state: FormState, action: FormAction): FormState {
+export function formReducer(
+	state: LoginFormState,
+	action: LoginFormAction
+): LoginFormState {
 	switch (action.type) {
 		case 'SET_VALUE':
 			return { ...state, values: { ...state.values, ...action.payload } };
 		case 'CLEAR':
 			return {
 				...state,
-				values: ARRAY_USERS.values,
+				values: INITIAL_LOGIN_FORM_STATE.values,
 				isFormReadyToSubmit: false
 			};
 		case 'RESET_VALIDITY':
-			return { ...state, isValid: ARRAY_USERS.isValid };
+			return { ...state, isValid: INITIAL_LOGIN_FORM_STATE.isValid };
 		case 'SUBMIT': {
 			const isValidUserName = !!state.values.userName?.trim().length;
 
