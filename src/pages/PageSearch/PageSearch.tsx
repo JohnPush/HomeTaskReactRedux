@@ -2,15 +2,12 @@ import styles from './PageSearch.module.css';
 import Search from '../../components/Search/Search';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { PREFIX } from '../../helpers/API';
-import { Film } from '../../interfaces/film.interface';
+import { Product } from '../../interfaces/film.interface';
 import axios, { AxiosError } from 'axios';
 import { SearchList } from './SearchList/SearchList';
 
-
-
-
 export function PageSearch() {
-	const [films, setFilms] = useState<Film["description"]>([]);
+	const [products, setProducts] = useState<Product[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string | undefined>();
 	const [filter, setFilter] = useState<string>();
@@ -21,15 +18,16 @@ export function PageSearch() {
 
 	const getMenu = async (name?: string) => {
 		try {
-        setIsLoading(true);
-        const url = name ? `${PREFIX}/?q=${name}` : `${PREFIX}/?q=`;
-        const res = await axios.get(url);
-        const data = res.data.description;
-        setFilms(data);
-        setIsLoading(false);
+			setIsLoading(true);
+			const { data } = await axios.get<Product[]>(`${PREFIX}/products`, {
+				params: {
+					name
+				}
+			});
+			setProducts(data);
+			setIsLoading(false);
 		} catch (e) {
 			console.error(e);
-      		setFilms([]);
 			if (e instanceof AxiosError) {
 				setError(e.message);
 			}
@@ -49,12 +47,15 @@ export function PageSearch() {
 			</div>
 			<div>
 				{error && <>{error}</>}
-				{!isLoading && films.length > 0 && <SearchList films={films} />}
+				{!isLoading && products.length > 0 && <SearchList products={products} />}
 				{isLoading && <>Ищем фильмы...</>}
-				{!isLoading && films.length === 0 && 
+				{!isLoading && products.length === 0 && 
 				<div>
 				<div className={styles['title']}>Упс... Ничего не найдено</div>
 				<div className={styles['subtitle']}>Попробуйте изменить запрос или ввести более точное название фильма</div>
+				<div className={styles['gif']}>
+					<img  src='/Ничего не найдено.webp' ></img>
+				</div>
 				</div>
 				}
 			</div>

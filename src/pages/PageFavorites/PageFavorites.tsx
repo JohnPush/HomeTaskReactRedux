@@ -1,3 +1,41 @@
+import { useSelector } from 'react-redux';
+import Heading from '../../components/Heading/Heading';
+import { RootState } from '../../store/store';
+import CardFilm from '../../components/CardFilm/CardFilm';
+
+import { useEffect, useState } from 'react';
+import { Product } from '../../interfaces/film.interface';
+import axios from 'axios';
+import { PREFIX } from '../../helpers/API';
+import styles from './PageFavorites.module.css';
+
 export function PageFavorites() {
-	return <>PageFavorites</>;
+	const [cartProducts, setCardProducts] = useState<Product[]>([]);
+	const items = useSelector((s: RootState) => s.cart.items);
+
+	const getItem = async (id: number) => {
+		const { data } = await axios.get<Product>(`${PREFIX}/products/${id}`);
+		return data;
+	};
+
+	const loadAllItems = async () => {
+		const res = await Promise.all(items.map(i => getItem(i.id)));
+		setCardProducts(res);
+	};
+
+	useEffect(() => {
+		loadAllItems();
+	}, [items]);
+
+	return <>
+		<Heading className={styles['headling']} heading={'Избранное'}/>
+		{items.map(i => {
+			const product = cartProducts.find(p => p.id === i.id);
+			if (!product) {
+				return;
+			}
+			return <CardFilm key={product.id} {...product} />;
+
+		})}
+	</>;
 }
