@@ -1,7 +1,5 @@
 export interface Profile {
+	userName: string;
+	isLogined: boolean;
 	id: number;
-	email: string;
-	address: string;
-	name: string;
-	phone: string;
 }

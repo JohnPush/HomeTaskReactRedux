@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createBrowserRouter, defer } from 'react-router-dom';
 import { Layout } from './layouts/Layout/Layout.tsx';
-// import { PageLogin } from './pages/PageLogin/PageLogin.tsx';
+import { PageLogin } from './pages/PageLogin/PageLogin.tsx';
 import { PageMovie } from './pages/PageMovie/PageMovie.tsx';
 import { PageFavorites } from './pages/PageFavorites/PageFavorites.tsx';
 import { Error as ErrorPage } from './pages/Error/Error.tsx';
-// import { RequireAuth } from './helpers/RequireAuth.tsx';
+import { RequireAuth } from './helpers/RequireAuth.tsx';
 import { Provider } from 'react-redux';
 import { store } from './store/store.ts';
 import axios from 'axios';
@@ -18,9 +18,7 @@ const PageSearch = lazy(() => import('./pages/PageSearch/PageSearch'));
 const router = createBrowserRouter([
 	{
 		path: '/',
-		// element: <RequireAuth><Layout /></RequireAuth>,
-		element: <Layout />,
-
+		element: <RequireAuth><Layout /></RequireAuth>,
 		children: [
 			{
 				path: '/',
@@ -47,16 +45,16 @@ const router = createBrowserRouter([
 			
 		]
 	},
-	// {
-	// 	path: '/',
-	// 	element: <Layout />,
-	// 	children: [
-	// 					{
-	// 			path: 'login',
-	// 			element: <PageLogin />
-	// 		},
-	// 	]
-	// },
+	{
+		path: '/',
+		element: <Layout />,
+		children: [
+						{
+				path: '/login',
+				element: <PageLogin />
+			},
+		]
+	},
 	{
 		path: '*',
 		element: <ErrorPage />

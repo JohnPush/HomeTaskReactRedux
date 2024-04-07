@@ -1,13 +1,12 @@
-import { useSelector } from 'react-redux';
-import Heading from '../../components/Heading/Heading';
-import { RootState } from '../../store/store';
-import CardFilm from '../../components/CardFilm/CardFilm';
-
-import { useEffect, useState } from 'react';
-import { Product } from '../../interfaces/film.interface';
-import axios from 'axios';
-import { PREFIX } from '../../helpers/API';
 import styles from './PageFavorites.module.css';
+import Heading from '../../components/Heading/Heading';
+import ListFilms from '../../components/ListFilms/ListFilms';
+import { RootState } from '../../store/store';
+import { PREFIX } from '../../helpers/API';
+import { Product } from '../../interfaces/film.interface';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 export function PageFavorites() {
 	const [cartProducts, setCardProducts] = useState<Product[]>([]);
@@ -27,15 +26,10 @@ export function PageFavorites() {
 		loadAllItems();
 	}, [items]);
 
-	return <>
-		<Heading className={styles['headling']} heading={'Избранное'}/>
-		{items.map(i => {
-			const product = cartProducts.find(p => p.id === i.id);
-			if (!product) {
-				return;
-			}
-			return <CardFilm key={product.id} {...product} />;
-
-		})}
-	</>;
+	return (
+		<div className={styles['pageFavorites']}>
+			<Heading heading={'Избранное'}/>
+			<ListFilms products={cartProducts} />
+		</div>
+	);
 }

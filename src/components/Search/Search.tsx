@@ -1,6 +1,5 @@
 import styles from './Search.module.css';
-import Heading from '../Heading/Heading';
-import Paragraph from '../Paragraph/Paragraph';
+
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { useEffect, useReducer, useRef, ChangeEvent, FormEvent } from 'react';
@@ -62,10 +61,6 @@ function Search({ onChange }: SearchProps) {
 
 	return (
 		<form className={styles['search']} onSubmit={handleSearchSubmit}>
-			<div className={styles['containerHeading']}>
-				<Heading heading="Поиск" />
-				<Paragraph paragraph="Введите название фильма, сериала или мультфильма для поиска и добавления в избранное." />
-			</div>
 			<div className={styles['containerInputButton']}>
 				<Input
 					placeholder="Введите название"
@@ -74,7 +69,7 @@ function Search({ onChange }: SearchProps) {
 					onChange={onChangeHandler}
 					value={values.searchField}
 					name="searchField"
-					isValid={!isValid.searchField}
+					isValid={isValid.searchField}
 					showIconSearch={true}
 				/>
 				<Button textButton="Искать" />

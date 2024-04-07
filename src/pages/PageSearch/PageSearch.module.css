@@ -2,6 +2,14 @@
 	padding: 80px 0px;
 }
 
+.paragraph {
+	color: var(--Grey-300, #8e95a9);
+	font-weight: 400;
+	margin-bottom: 30px;
+	width: 588px;
+	line-height: 24px;
+}
+
 .title {
 	font-weight: 600;
 	font-size: 48px;
