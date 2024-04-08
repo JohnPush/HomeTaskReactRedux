@@ -25,3 +25,13 @@
 .favorite-button_active:hover {
 	color: #365c50;
 }
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
+.icon img {
+	width: 100%;
+	height: 100%;
+}
