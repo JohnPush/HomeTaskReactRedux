@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispath, RootState } from '../../store/store';
-import { cartActions } from '../../store/favoriteList.slice';
+import { userActions } from '../../store/user.slice';
 
 interface FavoriteButtonProps {
 	id: number;
@@ -12,17 +12,31 @@ interface FavoriteButtonProps {
 
 function FavoriteButton(props: FavoriteButtonProps) {
 	const dispatch = useDispatch<AppDispath>();
-	const cartItems = useSelector((state: RootState) => state.cart.items);
-	const isFavorite = cartItems.some(item => item.id === props.id);
+	const loggedInProfile = useSelector((state: RootState) =>
+    	state.user.profile?.find(profile => profile.isLogined)
+  	);
+	const isFavorite = loggedInProfile && loggedInProfile.favoriteMovies.includes(props.id);
 
 	const toggleFavorite = (e: MouseEvent) => {
 		e.stopPropagation();
 		e.preventDefault();
-		if (isFavorite) {
-			dispatch(cartActions.delete(props.id));
-		} else {
-			dispatch(cartActions.add(props.id));
-		}
+    	if (loggedInProfile) {
+      		if (isFavorite) {
+        		dispatch(
+          			userActions.removeFavorite({
+            			userId: loggedInProfile.userId,
+            			movieId: props.id
+          			})
+        		);
+      		} else {
+        		dispatch(
+          			userActions.addFavorite({
+            			userId: loggedInProfile.userId,
+            			movieId: props.id
+          			})
+        		);
+      		}
+   	 	}
 	};
 
 	return (

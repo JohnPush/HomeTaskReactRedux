@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { saveState } from './storage';
 import { Profile } from '../interfaces/user.interface';
+import { RootState } from './store';
 
 export const USER_PERSISTENT_STATE = 'users';
 
@@ -28,16 +29,49 @@ export const userSlice = createSlice({
 				profiles.push({
 					userName: action.payload,
 					isLogined: true,
-					id:
+					userId:
 						profiles.length > 0
-							? Math.max(...profiles.map((profile) => profile.id)) + 1
-							: 1
+							? Math.max(...profiles.map((profile) => profile.userId)) + 1
+							: 1,
+					favoriteMovies: []
 				});
 			}
 
 			state.profile = profiles;
 
 			saveState(state.profile, USER_PERSISTENT_STATE);
+		},
+		addFavorite: (
+			state,
+			action: PayloadAction<{
+				// userName: string;
+				userId: number;
+				movieId: number;
+			}>
+		) => {
+			const { userId, movieId } = action.payload;
+			const profile = state.profile?.find(
+				(profile) => profile.userId === userId
+			);
+			if (profile) {
+				profile.favoriteMovies.push(movieId);
+				saveState(state.profile, USER_PERSISTENT_STATE);
+			}
+		},
+		removeFavorite: (
+			state,
+			action: PayloadAction<{ userId: number; movieId: number }>
+		) => {
+			const { userId, movieId } = action.payload;
+			const profile = state.profile?.find(
+				(profile) => profile.userId === userId
+			);
+			if (profile) {
+				profile.favoriteMovies = profile.favoriteMovies.filter(
+					(id) => id !== movieId
+				);
+				saveState(state.profile, USER_PERSISTENT_STATE);
+			}
 		},
 		logout: (state) => {
 			const profiles = state.profile || [];
@@ -51,5 +85,9 @@ export const userSlice = createSlice({
 	}
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, addFavorite, removeFavorite } = userSlice.actions;
+
+export const userActions = userSlice.actions;
+export const selectUserProfile = (state: RootState) => state.user.profile;
+
 export default userSlice.reducer;

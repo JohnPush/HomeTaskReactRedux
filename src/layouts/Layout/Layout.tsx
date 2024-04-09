@@ -7,13 +7,22 @@ import { logout } from '../../store/user.slice';
 
 
 export function Layout() {
-	const cartItems = useSelector((state: RootState) => state.cart.items);
 	const profiles = useSelector((state: RootState) => state.user.profile);
   	const dispatch = useDispatch();
 
     	const handleLogout = () => {
     	dispatch(logout());
   	};
+
+	const countFavoriteMovies = () => {
+        if (profiles) {
+            const currentUserProfile = profiles.find(profile => profile.isLogined);
+            if (currentUserProfile) {
+                return currentUserProfile.favoriteMovies.length;
+            }
+        }
+        return 0;
+    };
 
 	return (
 		<div className={styles['layout']}>
@@ -42,14 +51,14 @@ export function Layout() {
 						}
 					>
 						Мои фильмы
-						<div className={styles['menu__counter']}>{cartItems.length}</div>
+						<div className={styles['menu__counter']}>{countFavoriteMovies()}</div>
 					</NavLink>
 					{profiles && profiles.some(profile => profile.isLogined) ? (
-						<div>
+						<div className={styles['logout']}>
 							{profiles && profiles.length > 0 && profiles.some(profile => profile.isLogined) && (
   								<div className={styles.link}>
   									{profiles.find(profile => profile.isLogined)?.userName}
-  								  	<div className={styles.icon}>
+  								  	<div className={styles['icon']}>
   								    	<img src="/User Rounded.svg" alt="icon user" />
   								  	</div>
   								</div>
