@@ -1,18 +1,17 @@
 import styles from './PageFavorites.module.css';
 import Heading from '../../components/Heading/Heading';
 import ListFilms from '../../components/ListFilms/ListFilms';
-// import { RootState } from '../../store/store';
 import { PREFIX } from '../../helpers/API';
 import { Product } from '../../interfaces/film.interface';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-import { selectUserProfile } from '../../store/user.slice';
+import { selectLoggedInUserProfiles } from '../../store/user.slice';
 
 
 export function PageFavorites() {
-    const profiles = useSelector(selectUserProfile);
+    const profiles = useSelector(selectLoggedInUserProfiles);
 
 
 	const [cartProducts, setCardProducts] = useState<Product[]>([]);

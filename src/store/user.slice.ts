@@ -88,6 +88,7 @@ export const userSlice = createSlice({
 export const { login, logout, addFavorite, removeFavorite } = userSlice.actions;
 
 export const userActions = userSlice.actions;
-export const selectUserProfile = (state: RootState) => state.user.profile;
+export const selectLoggedInUserProfiles = (state: RootState) =>
+	state.user.profile?.filter((profile) => profile.isLogined);
 
 export default userSlice.reducer;
