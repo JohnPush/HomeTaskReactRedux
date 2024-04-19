@@ -1,25 +1,29 @@
 import styles from './PageLogin.module.css';
+import Heading from '../../components/Heading/Heading';
 import Login from '../../components/Login/Login';
-import { useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../context/user.context';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { useNavigate  } from 'react-router-dom';
+import { useEffect } from 'react';
+
 
 export function PageLogin() {
-    const userContext = useContext(UserContext);
-    const navigate = useNavigate();
+  	const profiles = useSelector((state: RootState) => state.user.profile);
+  	const isUserLoggedIn = profiles?.some(profile => profile.isLogined);
+  	const navigate = useNavigate();
 
     useEffect(() => {
-        if (userContext && userContext.getCurrentUser) {
-            const { loggedInUser } = userContext.getCurrentUser();
-            if (loggedInUser) {
-                navigate('/');
-            }
+        if (isUserLoggedIn) {
+            navigate('/');
         }
-    }, [userContext, navigate]);
+    }, [isUserLoggedIn, navigate]);
 
 	return (
-		<div className={styles['pageLogin']}>
-			<Login />
+		<div className={styles['pageLogin']} >
+            <div className={styles['containerHeading']}>
+				<Heading heading="Вход" />
+				<Login />
+			</div>
 		</div>
 	);
 }

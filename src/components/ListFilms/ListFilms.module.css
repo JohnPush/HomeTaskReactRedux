@@ -1,4 +1,4 @@
-.wrapper {
+.listFilms {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 24px;

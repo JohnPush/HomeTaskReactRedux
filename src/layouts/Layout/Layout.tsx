@@ -1,9 +1,29 @@
 import styles from './Layout.module.css';
-import Auth from '../../components/Auth/Auth';
 import cn from 'classnames';
 import { NavLink, Outlet } from 'react-router-dom';
+import {  useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store/store';
+import { logout } from '../../store/user.slice';
+
 
 export function Layout() {
+	const profiles = useSelector((state: RootState) => state.user.profile);
+  	const dispatch = useDispatch();
+
+    	const handleLogout = () => {
+    	dispatch(logout());
+  	};
+
+	const countFavoriteMovies = () => {
+        if (profiles) {
+            const currentUserProfile = profiles.find(profile => profile.isLogined);
+            if (currentUserProfile) {
+                return currentUserProfile.favoriteMovies.length;
+            }
+        }
+        return 0;
+    };
+
 	return (
 		<div className={styles['layout']}>
 			<div className={styles['navBar']}>
@@ -31,15 +51,40 @@ export function Layout() {
 						}
 					>
 						Мои фильмы
-						<div className={styles['menu__counter']}>X</div>
+						<div className={styles['menu__counter']}>{countFavoriteMovies()}</div>
 					</NavLink>
-					<Auth />
+					{profiles && profiles.some(profile => profile.isLogined) ? (
+						<div className={styles['logout']}>
+							{profiles && profiles.length > 0 && profiles.some(profile => profile.isLogined) && (
+  								<div className={styles.link}>
+  									{profiles.find(profile => profile.isLogined)?.userName}
+  								  	<div className={styles['icon']}>
+  								    	<img src="/User Rounded.svg" alt="icon user" />
+  								  	</div>
+  								</div>
+							)}
+							<div className={cn(styles['link'])} onClick={handleLogout}>
+							Выйти
+							</div>
+						</div>
+					) : (
+					<NavLink
+						to="/login"
+						className={({ isActive }) =>
+							cn(styles['link'], {
+								[styles.active]: isActive
+							})
+						}
+					>
+						Войти
+						<div className={styles['icon']}>
+							<img src="/Icon-login.svg" alt="icon login" />
+						</div>
+					</NavLink>
+					)}
 				</div>
 			</div>
-
-			<div>
-				<Outlet />
-			</div>
+			<Outlet />
 		</div>
 	);
 }

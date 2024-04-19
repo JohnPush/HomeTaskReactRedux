@@ -5,7 +5,6 @@ import { InputHTMLAttributes, forwardRef } from 'react';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	isValid?: boolean;
 	showIconSearch?: boolean;
-	className?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -14,9 +13,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 ) {
 	return (
 		<div
-			className={cn(className, {
-				[styles['inputSearch']]: showIconSearch,
-				[styles['inputLogin']]: !showIconSearch
+			className={cn(styles['inputForm'], className, {
+				[styles['inputFormSearch']]: showIconSearch,
+				[styles['inputFormLogin']]: !showIconSearch
 			})}
 		>
 			{showIconSearch && (
@@ -28,9 +27,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 				ref={ref}
 				placeholder={placeholder}
 				value={value}
-				className={cn(className, {
-					[styles['inputContent']]: !isValid,
-					[styles['invalid']]: isValid
+				className={cn(styles['input'], className, {
+					[styles['inputContent']]: isValid,
+					[styles['invalid']]: !isValid
 				})}
 				{...props}
 			/>

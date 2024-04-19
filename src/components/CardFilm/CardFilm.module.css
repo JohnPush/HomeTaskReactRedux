@@ -4,23 +4,17 @@
 	cursor: pointer;
 
 	border-radius: 12px;
-	background: rgba(32, 40, 62, 0.8);
-
-	backdrop-filter: blur(40px);
-	display: inline-flex;
-	padding: 8px 8px 16px 8px;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 16px;
-	color: var(--Grey-50, #ebeef5);
-	font-weight: 600;
-	line-height: 24px;
-	letter-spacing: 0.32px;
-	font-family: 'Poppins', sans-serif;
-	font-size: 16px;
-	font-style: normal;
 	width: 266px;
 	height: 504px;
+	padding: 8px 8px 16px 8px;
+
+	backdrop-filter: blur(80px);
+	background: rgba(32, 40, 62, 0.8);
+
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 20px;
 }
 
 .card-button:hover {
@@ -28,7 +22,27 @@
 	backdrop-filter: blur(40px);
 }
 
+.rating {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+	z-index: 2;
+}
+
 .poster {
-	max-width: 100%;
-	overflow: hidden;
+	width: 266px;
+	height: 400px;
+}
+
+.poster img {
+	width: 100%;
+	height: 100%;
+	border-radius: 8px;
+	object-fit: cover;
+}
+
+.nameMovie {
+	line-height: 150%;
+	letter-spacing: 0.02em;
+	color: #ebeef5;
 }

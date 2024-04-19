@@ -1,44 +1,37 @@
-import { Film } from '../../interfaces/film.interface';
+import { Product } from '../../interfaces/film.interface';
 import styles from './PageMovie.module.css';
-
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { PREFIX } from '../../helpers/API';
-
-import { useParams } from 'react-router-dom';
-
+import Rating from '../../components/Rating/Rating';
+import FavoriteButton from '../../components/FavoriteButton/FavoriteButton';
+import { Suspense } from 'react';
+import { Await, useLoaderData } from 'react-router-dom';
 
 export function PageMovie() {
-    const { id } = useParams();
+	const data = useLoaderData() as { data: Product };
 
-    const [movieData, setMovieData] = useState<Film | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-
-	    useEffect(() => {
-        const fetchMovieData = async () => {
-            try {
-                const { data } = await axios.get(`${PREFIX}/?q=${id}`);
-                setMovieData(data);
-                setLoading(false);
-            } catch (error) {
-                setError('Ошибка при загрузке данных');
-                setLoading(false);
-            }
-        };
-
-        fetchMovieData();
-    }, [id]);
-
-	   if (loading) return <div>Загрузка...</div>;
-    if (error) return <div>{error}</div>;
-    if (!movieData) return null;
-
-    const movie = movieData.description[0];
-    
     return <>
-	<div className={styles.title}>{movie['#TITLE']}</div>
-	<div className={styles.poster} style={{ backgroundImage: `url('${movie['#IMG_POSTER']}')`}}></div>
+        <Suspense fallback={'Загружаю...'}>
+	    	<Await
+	    		resolve={data.data}
+	    	>
+	    		{({ data }: { data: Product }) => (
+                    <div className={styles['pageMovie']}>
+                        <div className={styles.title}>{data.name}</div>
+						<div className={styles.description}>
+							<div className={styles.poster} >
+	                    	    <img src={data.image} alt="poster" />
+							</div>
+							<div className={styles.description__text}>
+                        		<div className={styles.ingredients}>{data.ingredients.join(', ')}</div>
+								<div className={styles.description__variable}>
+									<Rating valueRating={data.rating}/>
+									<FavoriteButton id={data.id} />
+								</div>
+							</div>
+						</div>
+                    </div>
+	    		)}
+	    	</Await>
+	    </Suspense>
 	</>;
 }
 
