@@ -1,14 +1,16 @@
 .button {
 	cursor: pointer;
+
+	border: 2px solid #7b6ef6;
 	border-radius: 12px;
 	padding: 16px 32px;
-	border: 2px solid var(--Primary-400, #7b6ef6);
-	background: var(--Primary-400, #7b6ef6);
-	color: var(--White-100, #fff);
+
+	background: #7b6ef6;
+
+	color: #fff;
 	font-size: 16px;
-	font-style: normal;
 	font-weight: 400;
-	line-height: 24px;
+	line-height: 150%;
 }
 .button:hover {
 	background: #51489e;

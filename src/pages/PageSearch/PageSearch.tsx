@@ -55,9 +55,6 @@ export function PageSearch() {
 			<div>
 				<div className={styles['title']}>Упс... Ничего не найдено</div>
 				<div className={styles['subtitle']}>Попробуйте изменить запрос или ввести более точное название фильма</div>
-				<div className={styles['gif']}>
-					<img  src='/Ничего не найдено.webp' ></img>
-				</div>
 			</div>
 			}
 		</div>

@@ -2,8 +2,6 @@ import { Product } from '../../interfaces/film.interface';
 import styles from './PageMovie.module.css';
 import Rating from '../../components/Rating/Rating';
 import FavoriteButton from '../../components/FavoriteButton/FavoriteButton';
-
-
 import { Suspense } from 'react';
 import { Await, useLoaderData } from 'react-router-dom';
 
@@ -16,7 +14,7 @@ export function PageMovie() {
 	    		resolve={data.data}
 	    	>
 	    		{({ data }: { data: Product }) => (
-                    <div >
+                    <div className={styles['pageMovie']}>
                         <div className={styles.title}>{data.name}</div>
 						<div className={styles.description}>
 							<div className={styles.poster} >

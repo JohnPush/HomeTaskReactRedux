@@ -1,10 +1,17 @@
 .layout {
-	padding: 16px 120px;
-	background: rgba(18, 24, 41, 0.8);
-	backdrop-filter: blur(20px);
+	background-image: url('/Background.svg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .navBar {
+	padding: 0 120px;
+	height: 80px;
+
+	background: rgba(18, 24, 41, 0.8);
+	backdrop-filter: blur(20px);
+
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -22,42 +29,39 @@
 }
 
 .link {
-	display: flex;
 	padding: 12px 16px;
+
+	display: flex;
 	align-items: center;
 	gap: 8px;
-	color: var(--Grey-200, #a8aebf);
-	font-weight: 600;
-	line-height: 24px;
+
+	color: #a8aebf;
 	letter-spacing: 0.32px;
+
 	cursor: pointer;
 	text-decoration: none;
 }
 
 .link:hover {
-	color: #fff;
+	color: #ffffff;
 }
 
 .active {
-	color: #fff;
+	color: #ffffff;
 }
 
 .menu__counter {
 	background: #7b6ef6;
-	color: #fff;
+
+	color: #ffffff;
 	font-size: 14px;
-	font-weight: 600;
-	line-height: 24px;
 	letter-spacing: 0.28px;
+
 	border-radius: 50%;
 	width: 24px;
 	height: 24px;
-	text-align: center;
-	flex-shrink: 0;
-}
 
-.login {
-	padding: 12px 32px;
+	text-align: center;
 }
 
 .icon {

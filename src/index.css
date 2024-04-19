@@ -1,10 +1,12 @@
 :root {
 	font-family: 'Poppins', sans-serif;
 	font-style: normal;
+	font-weight: 600;
+	line-height: 24px;
 
 	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background: var(--Grey-900, #121829);
+	color: #ffffff;
+	background: #121829;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -14,10 +16,5 @@
 }
 
 body {
-	background-image: url('/Background.svg');
-	background-size: cover; /* Масштабирование. Для покрытия всего экрана */
-	background-repeat: no-repeat; /* Запрет повторения */
-	background-position: center; /* Выравнивание по центру */
-	max-width: 1440px;
 	margin: auto;
 }

@@ -1,7 +1,8 @@
 .paragraph {
-	color: var(--Grey-300, #8e95a9);
-	font-weight: 400;
 	margin: 0;
 	width: 588px;
-	line-height: 24px;
+
+	font-weight: 400;
+	line-height: 150%;
+	color: #8e95a9;
 }

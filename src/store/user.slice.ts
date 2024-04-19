@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { saveState } from './storage';
+import { saveState, loadState } from './storage';
 import { Profile } from '../interfaces/user.interface';
 import { RootState } from './store';
 
@@ -10,7 +10,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-	profile: null
+	profile: loadState<Profile[]>(USER_PERSISTENT_STATE) ?? null
 };
 
 export const userSlice = createSlice({

@@ -22,7 +22,7 @@ function CardFilm(props: CardFilmProps) {
 				<div className={styles['poster']}>
 					<img src={props.image || ''} alt="poster" />
 				</div>
-				<div>{props.name || ''}</div>
+				<div className={styles['nameMovie']}>{props.name || ''}</div>
 				<FavoriteButton id={props.id} />
 			</div>
 		</Link>
